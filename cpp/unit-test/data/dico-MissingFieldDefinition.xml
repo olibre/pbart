@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef name="Qty" id="1" type="LONG"   deprecated="false" comment="First occurence" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="91" name="StOrder" deprecated="false" comment="a message">
+      <Field name="NotExist"  default="0" required="false" repeated="false" />
+    </MessageDef>
+  </MessagesDef>
+  
+</Dico>

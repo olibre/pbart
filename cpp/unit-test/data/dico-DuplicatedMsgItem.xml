@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Some thing="else"/>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef name="Qty" id="1" type="LONG"  deprecated="false" comment="Volume" />
+    <FieldDef name="Pos" id="3" type="BOOL"  deprecated="false" comment="short or long" />
+    <Hello  world="you" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="9100" name="StOrder" deprecated="false" comment="a message">
+      <Field name="Qty"  default="00042" required="true" repeated="false"  />
+      <Field name="Pos"  default="true"  required="false" repeated="false" />
+    </MessageDef>
+
+    <SmallMessage sms="pense a acheter le pain en retrant">
+      <Field sent="yes"/>
+    </SmallMessage>
+
+    <MessageDef id="9" name="StStruct" deprecated="true" comment="there are duplicated items here">
+      <Field name="Qty"  default="1000000" required="true"  repeated="false"  />
+      <Field name="Pos"  default="false"   required="false" repeated="false"  />
+      <Field name="Qty"  default="-199999" required="false" repeated="true"   />
+    </MessageDef>
+  </MessagesDef>
+
+  <WrongDef>
+    <FieldDef   name="abcd" />
+    <MessageDef name="1234" />
+  </WrongDef>
+  
+</Dico>
+
+<another>
+  <tag/>
+</another>
+

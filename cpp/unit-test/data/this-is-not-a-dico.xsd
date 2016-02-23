@@ -1,0 +1,93 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Dico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FieldsDef">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FieldDef" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="name" use="optional"/>
+                      <xs:attribute type="xs:byte" name="id" use="optional"/>
+                      <xs:attribute type="xs:string" name="type" use="optional"/>
+                      <xs:attribute name="deprecated" use="optional">
+                      	<xs:simpleType>
+                      		<xs:restriction base="xs:string">
+                      			<xs:enumeration value="true"></xs:enumeration>
+                      			<xs:enumeration value="false"></xs:enumeration>
+                      		</xs:restriction>
+                      	</xs:simpleType>
+                      </xs:attribute>
+                      <xs:attribute type="xs:string" name="comment" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MessagesDef">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MessageDef" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="Field" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="name" use="optional"/>
+                            <xs:attribute name="required"
+                            	use="optional">
+                            	<xs:simpleType>
+                            		<xs:restriction base="xs:string">
+                            			<xs:enumeration value="true"></xs:enumeration>
+                            			<xs:enumeration value="false"></xs:enumeration>
+                            		</xs:restriction>
+                            	</xs:simpleType>
+                            </xs:attribute>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Message" minOccurs="0">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="name"/>
+                            <xs:attribute name="required">
+                            	<xs:simpleType>
+                            		<xs:restriction base="xs:string">
+                            			<xs:enumeration value="true"></xs:enumeration>
+                            			<xs:enumeration value="false"></xs:enumeration>
+                            		</xs:restriction>
+                            	</xs:simpleType>
+                            </xs:attribute>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:byte" name="id" use="optional"/>
+                  <xs:attribute type="xs:string" name="name" use="optional"/>
+                  <xs:attribute name="deprecated" use="optional">
+                  	<xs:simpleType>
+                  		<xs:restriction base="xs:string">
+                  			<xs:enumeration value="true"></xs:enumeration>
+                  			<xs:enumeration value="false"></xs:enumeration>
+                  		</xs:restriction>
+                  	</xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="version"/>
+      <xs:attribute type="xs:string" name="xsd"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

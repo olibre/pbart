@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef name="Qty" id="1" type="LONG"  deprecated="false" comment="Volume" />
+    <FieldDef name="Pos" id="3" type="BOOL"  deprecated="false" comment="short or long" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="9100" name="StOrder" deprecated="false" comment="a message">
+      <Field name="Qty"  default="0" required="true" repeated="false"  />
+      <Field name="Pos"  default="0" required="false" repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="9100" name="StStruct" deprecated="true" comment="duplicated id">
+      <Field name="Qty"  default="0" required="true" repeated="false"  />
+      <Field name="Pos"  default="0" required="false" repeated="false" />
+    </MessageDef>
+  </MessagesDef>
+  
+</Dico>

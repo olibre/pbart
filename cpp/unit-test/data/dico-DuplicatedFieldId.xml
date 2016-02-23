@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef name="1"   id="1"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="2"   id="2"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="3"   id="3"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="4"   id="4"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="5"   id="5"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="6"   id="6"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="7"   id="7"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="8"   id="8"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="9"   id="9"   type="string" deprecated="false" comment="no" />
+    <FieldDef name="Qty" id="100" type="LONG"   deprecated="false" comment="Id is 100" />
+    <FieldDef name="Pos" id="100" type="BOOL"   deprecated="TRUE"  comment="Id is also 100" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="91" name="StOrder" deprecated="false" comment="a message">
+      <Field name="1"  default="0" required="true" repeated="false"  />
+      <Field name="2"  default="0" required="false" repeated="false" />
+    </MessageDef>
+  </MessagesDef>
+  
+</Dico>

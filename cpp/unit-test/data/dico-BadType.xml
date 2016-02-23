@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef name="Qty"    id="1" type="Exposant"  deprecated="false" comment="Exposant is not a valide type" />
+    <FieldDef name="Pos"    id="3" type="LONGUE"    deprecated="false" comment="Position longue" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="91" name="StOrder" deprecated="false" comment="a message">
+      <Field name="Qty"  default="0" required="true" repeated="false"  />
+      <Field name="Pos"  default="0" required="false" repeated="false" />
+    </MessageDef>
+  </MessagesDef>
+  
+</Dico>

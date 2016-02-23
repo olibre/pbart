@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Dico version="1.0.0" xsd="1.0.0" env="dev">
+
+  <FieldsDef>
+    <FieldDef id="10" name="boolean_0"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="11" name="boolean_1"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="12" name="boolean_2"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="13" name="boolean_3"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="14" name="boolean_4"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="15" name="boolean_5"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="16" name="boolean_6"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="17" name="boolean_7"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="18" name="boolean_8"    type="bool"    deprecated="false" comment="" />
+    <FieldDef id="19" name="boolean_9"    type="bool"    deprecated="false" comment="" />
+
+    <FieldDef id="20" name="long_0"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="21" name="long_1"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="22" name="long_2"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="23" name="long_3"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="24" name="long_4"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="25" name="long_5"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="26" name="long_6"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="27" name="long_7"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="28" name="long_8"    type="long"    deprecated="false" comment="" />
+    <FieldDef id="29" name="long_9"    type="long"    deprecated="false" comment="" />
+
+    <FieldDef id="30" name="double_0"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="31" name="double_1"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="32" name="double_2"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="33" name="double_3"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="34" name="double_4"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="35" name="double_5"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="36" name="double_6"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="37" name="double_7"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="38" name="double_8"    type="double"    deprecated="false" comment="" />
+    <FieldDef id="39" name="double_9"    type="double"    deprecated="false" comment="" />
+
+    <FieldDef id="40" name="string_0"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="41" name="string_1"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="42" name="string_2"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="43" name="string_3"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="44" name="string_4"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="45" name="string_5"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="46" name="string_6"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="47" name="string_7"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="48" name="string_8"    type="string"    deprecated="false" comment="" />
+    <FieldDef id="49" name="string_9"    type="string"    deprecated="false" comment="" />
+  </FieldsDef>
+
+  <MessagesDef>
+    <MessageDef id="1" name="BoolOptional" deprecated="false" comment="">
+      <Field   name="boolean_0"           default="1" required="false"  repeated="false" />
+      <Field   name="boolean_1"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_2"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_3"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_4"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_5"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_6"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_7"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_8"           default="0" required="false"  repeated="false" />
+      <Field   name="boolean_9"           default="0" required="false"  repeated="false" />
+    </MessageDef>  
+    <MessageDef id="3" name="LongOptional" deprecated="false" comment="">
+      <Field   name="long_0"           default="1" required="false"  repeated="false" />
+      <Field   name="long_1"           default="0" required="false"  repeated="false" />
+      <Field   name="long_2"           default="0" required="false"  repeated="false" />
+      <Field   name="long_3"           default="0" required="false"  repeated="false" />
+      <Field   name="long_4"           default="0" required="false"  repeated="false" />
+      <Field   name="long_5"           default="0" required="false"  repeated="false" />
+      <Field   name="long_6"           default="0" required="false"  repeated="false" />
+      <Field   name="long_7"           default="0" required="false"  repeated="false" />
+      <Field   name="long_8"           default="0" required="false"  repeated="false" />
+      <Field   name="long_9"           default="0" required="false"  repeated="false" />
+    </MessageDef>  
+    <MessageDef id="5" name="DoubleOptional" deprecated="false" comment="">
+      <Field   name="double_0"           default="0" required="false"  repeated="false" />
+      <Field   name="double_1"           default="0" required="false"  repeated="false" />
+      <Field   name="double_2"           default="0" required="false"  repeated="false" />
+      <Field   name="double_3"           default="0" required="false"  repeated="false" />
+      <Field   name="double_4"           default="0" required="false"  repeated="false" />
+      <Field   name="double_5"           default="0" required="false"  repeated="false" />
+      <Field   name="double_6"           default="0" required="false"  repeated="false" />
+      <Field   name="double_7"           default="0" required="false"  repeated="false" />
+      <Field   name="double_8"           default="0" required="false"  repeated="false" />
+      <Field   name="double_9"           default="0" required="false"  repeated="false" />
+    </MessageDef>
+    <MessageDef id="7" name="StringOptional" deprecated="false" comment="">
+      <Field   name="string_0"           default="" required="false"  repeated="false" />
+      <Field   name="string_1"           default="" required="false"  repeated="false" />
+      <Field   name="string_2"           default="" required="false"  repeated="false" />
+      <Field   name="string_3"           default="" required="false"  repeated="false" />
+      <Field   name="string_4"           default="" required="false"  repeated="false" />
+      <Field   name="string_5"           default="" required="false"  repeated="false" />
+      <Field   name="string_6"           default="" required="false"  repeated="false" />
+      <Field   name="string_7"           default="" required="false"  repeated="false" />
+      <Field   name="string_8"           default="" required="false"  repeated="false" />
+      <Field   name="string_9"           default="" required="false"  repeated="false" />
+    </MessageDef>  
+
+    <MessageDef id="2" name="BoolSequence" deprecated="false" comment="">
+      <Field   name="boolean_0"          default="0" required="false"  repeated="true" />
+      <Field   name="boolean_1"          default="0" required="false"  repeated="true" />
+    </MessageDef>
+
+    <MessageDef id="4" name="LongSequence" deprecated="false" comment="">
+      <Field   name="long_0"             default="0" required="false"  repeated="true" />
+      <Field   name="long_1"             default="0" required="false"  repeated="true" />
+    </MessageDef>
+
+    <MessageDef id="6" name="DoubleSequence" deprecated="false" comment="">
+      <Field   name="double_0"           default="0" required="false"  repeated="true" />
+      <Field   name="double_1"           default="0" required="false"  repeated="true" />
+    </MessageDef>
+
+    <MessageDef id="8" name="StringSequence" deprecated="false" comment="">
+      <Field   name="string_0"           default="0" required="false"  repeated="true" />
+      <Field   name="string_1"           default="0" required="false"  repeated="true" />
+    </MessageDef>
+
+    <MessageDef id="9" name="ComplexMessage" deprecated="false" comment="">
+      <Message   name="BoolOptional"     default="0" required="false"  repeated="true" />
+      <Message   name="LongOptional"     default="0" required="false"  repeated="true" />
+      <Message   name="DoubleOptional"   default="0" required="false"  repeated="true" />
+      <Message   name="StringOptional"   default="0" required="false"  repeated="true" />
+      <Message   name="BoolSequence"     default="0" required="false"  repeated="true" />
+      <Message   name="LongSequence"     default="0" required="false"  repeated="true" />
+      <Message   name="DoubleSequence"   default="0" required="false"  repeated="true" />
+      <Message   name="StringSequence"   default="0" required="false"  repeated="true" />
+    </MessageDef>
+</MessagesDef>
+
+
+<FieldsDef>
+  <FieldDef id="51" name="eventId"              type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="52" name="type"                 type="STRING"  deprecated="false" comment="StRoot" />
+  <FieldDef id="53" name="eventName"            type="STRING"  deprecated="false" comment="StRoot" />
+  <FieldDef id="54" name="subEventName"         type="STRING"  deprecated="false" comment="StRoot" />
+  <FieldDef id="55" name="transientData"        type="BOOL"    deprecated="false" comment="StRoot" />
+  <FieldDef id="56" name="EDAEventID"           type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="57" name="lastRecIDReloaded"    type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="58" name="lastEDAIDReloaded"    type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="59" name="lastPurgeTimestamp"   type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="60" name="lastRecIDBeforePurge" type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="50" name="lastPurgedRecID"      type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="61" name="uniqueEventID"        type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="62" name="EMessageType"         type="LONG"    deprecated="false" comment="StRoot" />
+  <FieldDef id="63" name="start"                type="LONG"    deprecated="false" comment="StRdvStatistics" />
+  <FieldDef id="64" name="rdvMsgId"             type="LONG"    deprecated="false" comment="StRdvStatistics" />
+  <FieldDef id="65" name="rdvMsgFailure"        type="LONG"    deprecated="false" comment="StRdvStatistics" />
+  <FieldDef id="66" name="ETargetSystem"        type="LONG"    deprecated="false" comment="StOrderRoutingInfo" />
+  <FieldDef id="67" name="EKinematic"           type="LONG"    deprecated="false" comment="StOrderRoutingInfo" />
+  <FieldDef id="68" name="EForeignSystem"       type="LONG"    deprecated="false" comment="synapse::misc::StFid" />
+  <FieldDef id="69" name="lValue"               type="LONG"    deprecated="false" comment="UIdT_Id" />
+  <FieldDef id="70" name="sValue"               type="STRING"  deprecated="false" comment="UIdT_Id" />
+  <FieldDef id="71" name="name"                 type="STRING"  deprecated="false" comment="synapse::common::Statistic" />
+</FieldsDef>
+
+<MessagesDef>
+
+    <MessageDef id="133" name="UIdT_Id" deprecated="false" comment="misc_def.idl">
+      <Field   name="lValue"           default="0" required="false"  repeated="false" />
+      <Field   name="sValue"           default="0" required="false"  repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="134" name="UIdT_subId" deprecated="false" comment="misc_def.idl">
+      <Field   name="lValue"           default="0" required="false"  repeated="false" />
+      <Field   name="sValue"           default="0" required="false"  repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="125" name="StRdvStatistics" deprecated="false" comment="message_def.idl">
+      <Field   name="start"            default="0" required="true"  repeated="false" />
+      <Field   name="rdvMsgId"         default="0" required="true"  repeated="false" />
+      <Field   name="rdvMsgFailure"    default="0" required="true"  repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="130" name="StOrderRoutingInfo"   deprecated="false" comment="misc_def.idl" >
+      <Field   name="ETargetSystem"    default="0" required="true"  repeated="false" />
+      <Field   name="EKinematic"       default="0" required="true"  repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="131" name="synapse::misc::StFid"   deprecated="false" comment="misc_def.idl" >
+      <Field   name="EForeignSystem"   default="0" required="true"  repeated="false" />
+      <Message name="UIdT_Id"          default="0" required="true"  repeated="false" />
+      <Message name="UIdT_subId"       default="0" required="true"  repeated="false" />
+    </MessageDef>  
+
+    <MessageDef id="132" name="synapse::common::Statistic"   deprecated="false" comment="common_def.idl" >
+      <Field   name="name"             default="0" required="true"  repeated="false" />
+      <!--Message name="UValue"           default="0" required="true"  repeated="false" /-->
+    </MessageDef>
+    
+    <MessageDef id="129" name="StRdvClientOrderStatistics"  deprecated="false" comment="message_def.idl" >
+      <Message   name="synapse::misc::StFid"         default="0" required="true"  repeated="false" />
+      <Message   name="synapse::common::Statistic"   default="0" required="false" repeated="true"  />
+    </MessageDef>
+
+    <MessageDef id="128" name="StRdvMarketOrderStatistics"  deprecated="false" comment="message_def.idl" >
+      <Message   name="synapse::misc::StFid"         default="0" required="true"  repeated="false" />
+      <Message   name="synapse::common::Statistic"   default="0" required="false" repeated="true"  />
+    </MessageDef>
+
+    <MessageDef id="127" name="StRdvExecutionStatistics"    deprecated="false" comment="message_def.idl" >
+      <Message   name="synapse::misc::StFid"         default="0" required="true"  repeated="false" />
+      <Message   name="synapse::common::Statistic"   default="0" required="false" repeated="true"  />
+    </MessageDef>
+
+    <MessageDef id="126" name="URdvStatistics" deprecated="false" comment="message_def.idl">
+      <Message name="StRdvClientOrderStatistics" default="0" required="false" repeated="false" />
+      <Message name="StRdvMarketOrderStatistics" default="0" required="false" repeated="false" />
+      <Message name="StRdvExecutionStatistics"   default="0" required="false" repeated="false" />
+    </MessageDef>
+    
+    <MessageDef id="124" name="StRoot" deprecated="false" comment="message_def.idl">
+      <Field   name="EMessageType"         default="0" required="true"  repeated="false" />
+      <Field   name="eventId"              default="0" required="true"  repeated="false" />
+      <Message name="StRdvStatistics"      default="0" required="false" repeated="false" />
+      <Field   name="type"                 default="0" required="true"  repeated="false" />
+      <Field   name="eventName"            default="0" required="true"  repeated="false" />
+      <Field   name="subEventName"         default="0" required="true"  repeated="false" />
+      <Field   name="transientData"        default="0" required="true"  repeated="false" />
+      <Field   name="EDAEventID"           default="0" required="false" repeated="false" />
+      <Field   name="lastRecIDReloaded"    default="0" required="false" repeated="false" />
+      <Field   name="lastEDAIDReloaded"    default="0" required="false" repeated="false" />
+      <Field   name="lastPurgeTimestamp"   default="0" required="false" repeated="false" />
+      <Field   name="lastRecIDBeforePurge" default="0" required="false" repeated="false" />
+      <Field   name="lastPurgedRecID"      default="0" required="false" repeated="false" />
+      <Field   name="uniqueEventID"        default="0" required="false" repeated="false" />
+      <Message name="URdvStatistics"       default="0" required="true"  repeated="true"  />
+    </MessageDef>
+
+</MessagesDef>
+
+
+<FieldsDef>
+  <FieldDef id= "72" name="marketPlace"                             type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "73" name="marketSegment"                           type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "74" name="exchangeCode"                            type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "75" name="activity"                                type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "76" name="portfolio"                               type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "77" name="profitCenter"                            type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "78" name="creator"                                 type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "79" name="lastTrader"                              type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "80" name="SaleInCharge"                            type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "81" name="visibilityGroup"                         type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "82" name="handlingCode"                            type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "83" name="synapse::business::order::ETradingMode"  type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "84" name="synapse::common::ECurrency"              type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "85" name="synapse::business::ESide"                type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "86" name="synapse::business::order::EBookingType"  type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "87" name="hardToBorrowInfo"                        type="STRING"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "88" name="synapse::business::order::EMarginInfo"   type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "89" name="synapse::misc::EBookingState"            type="LONG"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "90" name="isNonStandardSettlement"                 type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "91" name="isGuarantedOrder"                        type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "92" name="isHardToBorrow"                          type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "93" name="isCSA"                                   type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "94" name="isRealTimeExec"                          type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "95" name="isSRD"                                   type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "96" name="isContinuousTradingOnly"                 type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "97" name="isOutCry"                                type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "98" name="sollicited"                              type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id= "99" name="crds"                                    type="STRING"  deprecated="false" comment="synapse::obs::client::StClientId" />
+  <FieldDef id="100" name="mnemo"                                   type="STRING"  deprecated="false" comment="synapse::obs::client::StClientId" />
+  <FieldDef id="101" name="account"                                 type="STRING"  deprecated="false" comment="synapse::obs::client::StClientId" />
+  <FieldDef id="102" name="EBookingCodeType"                        type="LONG"    deprecated="false" comment="synapse::misc::StBookingCode" />
+  <FieldDef id="103" name="clientAccountId"                         type="STRING"  deprecated="false" comment="StClientConnectivityInfo" />
+  <FieldDef id="104" name="investorId"                              type="STRING"  deprecated="false" comment="StClientConnectivityInfo" />
+  <FieldDef id="105" name="connectivityIssuerId"                    type="STRING"  deprecated="false" comment="StClientConnectivityInfo" />
+  <FieldDef id="106" name="terminalId"                              type="STRING"  deprecated="false" comment="StClientConnectivityInfo" />
+  <FieldDef id="107" name="isStrategy"                              type="BOOL"    deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id="108" name="EProductCodeType"                        type="LONG"    deprecated="false" comment="StProductCode" />
+  <FieldDef id="109" name="synapse::common::UTime"                  type="DOUBLE"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id="110" name="myName"                                  type="STRING"  deprecated="false" comment="synapse::common::StField" />
+  <FieldDef id="112" name="name1"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="113" name="name2"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="114" name="name3"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="115" name="name4"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="116" name="name5"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="117" name="name6"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
+  <FieldDef id="118" name="synapse::common::StDateTime"             type="DOUBLE"  deprecated="false" comment="StOrderDefInternalSection" />
+  <FieldDef id="119" name="quantity"                                type="LONG"    deprecated="false" comment="" />
+  
+  
+</FieldsDef>
+
+<MessagesDef>
+
+  <MessageDef id="143" name="synapse::common::StField" deprecated="false" comment="common_def.idl replaced by PBART">
+    <!--
+    <Field     name="name"           default="0" required="true"  repeated="false" />
+    <Field     name="sValue"         default="0" required="true"  repeated="false" />
+    -->
+    <Field     name="myName"         default="0" required="true"  repeated="false" />
+  </MessageDef>
+
+  <MessageDef id="142" name="synapse::common::SeqFields" deprecated="false" comment="common_def.idl replaced by PBART">
+    <Field     name="name1"         default="0" required="true"  repeated="false" />
+    <Field     name="name2"         default="0" required="true"  repeated="false" />
+    <Field     name="name3"         default="0" required="true"  repeated="false" />
+    <Field     name="name4"         default="0" required="true"  repeated="false" />
+    <Field     name="name5"         default="0" required="true"  repeated="false" />
+    <Field     name="name6"         default="0" required="true"  repeated="false" />
+  </MessageDef>
+  
+  <MessageDef id="141" name="StProductCode" deprecated="false" comment="business_common_def.idl">
+    <Field     name="EProductCodeType"             default="0" required="true"  repeated="false" />
+    <Field     name="sValue"                       default="0" required="true"  repeated="false" />
+    <Message   name="synapse::common::StField"     default="0" required="false" repeated="false" />
+  </MessageDef>
+
+  <MessageDef id="140" name="StProductLeg" deprecated="false" comment="business_common_def.idl">
+    <Message   name="StProductCode"                default="0" required="true"  repeated="true" />
+    <Field     name="quantity"                     default="0" required="true"  repeated="false" />
+    <Field     name="synapse::business::ESide"     default="0" required="true"  repeated="false" />
+    <Message   name="synapse::common::SeqFields"   default="0" required="true"  repeated="false" />
+  </MessageDef>
+
+  <MessageDef id="139" name="synapse::business::StProductDef" deprecated="false" comment="business_common_def.idl">
+    <Message   name="StProductCode"                default="0" required="true"  repeated="true"  />
+    <Message   name="synapse::common::SeqFields"   default="0" required="true"  repeated="false" />
+    <Field     name="isStrategy"                   default="0" required="true"  repeated="false" />
+    <Message   name="StProductLeg"                 default="0" required="true"  repeated="true" />
+  </MessageDef>
+
+  <MessageDef id="138" name="synapse::obs::client::StClientConnectivityInfo" deprecated="false" comment="obs_client_order_def.idl">
+    <Field   name="clientAccountId"                default="0" required="true"  repeated="false" />
+    <Field   name="investorId"                     default="0" required="true"  repeated="false" />
+    <Field   name="connectivityIssuerId"           default="0" required="true"  repeated="false" />
+    <Field   name="terminalId"                     default="0" required="true"  repeated="false" />
+  </MessageDef>
+
+  <MessageDef id="137" name="synapse::misc::StBookingCode" deprecated="false" comment="misc_def.idl">
+    <Field   name="sValue"                         default="0" required="true"  repeated="false" />
+    <Field   name="EBookingCodeType"               default="0" required="true"  repeated="false" />
+  </MessageDef>
+  
+  <MessageDef id="136" name="synapse::obs::client::StClientId" deprecated="false" comment="obs_client_order_def.idl">
+    <Field   name="crds"                           default="0" required="true"  repeated="false" />
+    <Field   name="mnemo"                          default="0" required="true"  repeated="false" />
+    <Message name="synapse::misc::StBookingCode"   default="0" required="true"  repeated="false" />
+    <Field   name="account"                        default="0" required="true"  repeated="false" />
+  </MessageDef>
+
+  <MessageDef id="135" name="synapse::obs::client::cash::StOrderDefInternalSection" deprecated="false" comment="message_def.idl">
+    <Message name="synapse::obs::client::StClientId"                 default="0" required="true"  repeated="false" />
+    <Message name="synapse::obs::client::StClientConnectivityInfo"   default="0" required="false" repeated="false" />
+    <Field   name="synapse::business::order::ETradingMode"           default="0" required="true"  repeated="false" />
+    <Message name="synapse::business::StProductDef"                  default="0" required="true"  repeated="false" />
+    <Field   name="synapse::common::ECurrency"                       default="0" required="true"  repeated="false" />
+    <Field   name="marketPlace"                                      default="0" required="true"  repeated="false" />
+    <Field   name="marketSegment"                                    default="0" required="true"  repeated="false" />
+    <Field   name="exchangeCode"                                     default="0" required="true"  repeated="false" />
+    <Field   name="synapse::common::UTime"                           default="0" required="true"  repeated="false" />
+    <Field   name="synapse::business::ESide"                         default="0" required="true"  repeated="false" />
+    <Field   name="activity"                                         default="0" required="false" repeated="false" />
+    <Field   name="portfolio"                                        default="0" required="true"  repeated="false" />
+    <Field   name="profitCenter"                                     default="0" required="false" repeated="false" />
+    <Field   name="synapse::business::order::EBookingType"           default="0" required="true"  repeated="false" />
+    <Field   name="creator"                                          default="0" required="true"  repeated="false" />
+    <Field   name="lastTrader"                                       default="0" required="false" repeated="false" />
+    <Field   name="SaleInCharge"                                     default="0" required="false" repeated="false" />
+    <Field   name="visibilityGroup"                                  default="0" required="false" repeated="false" />
+    <Field   name="handlingCode"                                     default="0" required="false" repeated="false" />
+    <Field   name="isNonStandardSettlement"                          default="0" required="true"  repeated="false" />
+    <Field   name="isGuarantedOrder"                                 default="0" required="true"  repeated="false" />
+    <Field   name="isHardToBorrow"                                   default="0" required="true"  repeated="false" />
+    <Field   name="hardToBorrowInfo"                                 default="0" required="false" repeated="false" />
+    <Field   name="synapse::business::order::EMarginInfo"            default="0" required="true"  repeated="false" />
+    <Field   name="synapse::misc::EBookingState"                     default="0" required="true"  repeated="false" />
+    <Field   name="isCSA"                                            default="0" required="true"  repeated="false" />
+    <Field   name="isRealTimeExec"                                   default="0" required="true"  repeated="false" />
+    <Field   name="isSRD"                                            default="0" required="true"  repeated="false" />
+    <Field   name="isContinuousTradingOnly"                          default="0" required="true"  repeated="false" />
+    <Field   name="isOutCry"                                         default="0" required="true"  repeated="false" />
+    <Field   name="sollicited"                                       default="0" required="true"  repeated="false" />
+    <Field   name="synapse::common::StDateTime"                      default="0" required="true"  repeated="false" />
+    <Message name="synapse::common::SeqFields"                       default="0" required="true"  repeated="false" />
+  </MessageDef>
+
+   
+    <MessageDef id="150" name="StClientOrderInternalSectionMsg" deprecated="false" comment="message_cash_def.idl">
+      <Message   name="StRoot"                                                default="0" required="true"  repeated="false" />
+      <Message   name="synapse::misc::StFid"                                  default="0" required="true"  repeated="false" />
+      <Message   name="synapse::obs::client::cash::StOrderDefInternalSection" default="0" required="true"  repeated="false" />
+    </MessageDef>
+
+    <MessageDef id="151" name="synapse::message::StListedExecMsg"        deprecated="false" comment="" />
+    <MessageDef id="152" name="synapse::message::StOTCExecMsg"           deprecated="false" comment="" />
+    <MessageDef id="153" name="synapse::message::StCrossExecMsg"         deprecated="false" comment="" />
+    <MessageDef id="154" name="synapse::message::StReallocateExecMsg"    deprecated="false" comment="" />
+    <MessageDef id="155" name="synapse::message::StMarketOrderMsg"       deprecated="false" comment="" />
+    <MessageDef id="156" name="synapse::message::StMarketOrderCancelMsg" deprecated="false" comment="" />
+    <MessageDef id="157" name="StClientOrderMsg"                         deprecated="false" comment="" />
+    <MessageDef id="158" name="StClientOrderStateMsg"                    deprecated="false" comment="" />
+    <MessageDef id="159" name="StClientOrderAliasMsg"                    deprecated="false" comment="" />
+    <MessageDef id="120" name="StClientOrderDestinationSetMsg"           deprecated="false" comment="" />
+    <MessageDef id="121" name="StClientOrderMergeMsg"                    deprecated="false" comment="" />
+    <MessageDef id="122" name="StClientOrderCustomerSectionMsg"          deprecated="false" comment="" />
+
+    <MessageDef id="123" name="UEventData" deprecated="false" comment="message_cash_def.idl">
+      <Message name="synapse::message::StListedExecMsg"        default="0" required="false"  repeated="false" />
+      <Message name="synapse::message::StOTCExecMsg"           default="0" required="false"  repeated="false" />
+      <Message name="synapse::message::StCrossExecMsg"         default="0" required="false"  repeated="false" />
+      <Message name="synapse::message::StReallocateExecMsg"    default="0" required="false"  repeated="false" />
+      <Message name="synapse::message::StMarketOrderMsg"       default="0" required="false"  repeated="false" />
+      <Message name="synapse::message::StMarketOrderCancelMsg" default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderMsg"                         default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderStateMsg"                    default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderAliasMsg"                    default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderDestinationSetMsg"           default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderMergeMsg"                    default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderInternalSectionMsg"          default="0" required="false"  repeated="false" />
+      <Message name="StClientOrderCustomerSectionMsg"          default="0" required="false"  repeated="false" />
+    </MessageDef>
+    
+
+    
+  </MessagesDef>
+
+</Dico>
+
