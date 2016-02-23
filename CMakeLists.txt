@@ -38,6 +38,14 @@ set( MARCH "corei7"  CACHE STRING "Control flag -march" )
 # Usage: cmake -DOPTIM=-Ofast
 set( OPTIM "" CACHE STRING "Control flags -Ox" )
 
+# Usage: cmake -DLTO=ON
+option (LTO "Link Time Optimization" OFF)
+
+# Usage: cmake -DPGO=generate
+#        ctest
+#        cmake -DPGO=use
+set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or use)" )
+
 
 ######################
 ## CMAKE_BUILD_TYPE ##
