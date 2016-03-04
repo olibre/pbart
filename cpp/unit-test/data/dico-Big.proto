@@ -51,407 +51,407 @@
 
 // ----------------------------------------------------------------------------
 message BoolOptional     {
-	optional bytes           	header          	= 1	[default="\x1\xe0\xce"];
-	optional bool            	boolean_0       	= 10	[default=true];
-	optional bool            	boolean_1       	= 11	[default=false];
-	optional bool            	boolean_2       	= 12	[default=false];
-	optional bool            	boolean_3       	= 13	[default=false];
-	optional bool            	boolean_4       	= 14	[default=false];
-	optional bool            	boolean_5       	= 15	[default=false];
-	optional bool            	boolean_6       	= 16	[default=false];
-	optional bool            	boolean_7       	= 17	[default=false];
-	optional bool            	boolean_8       	= 18	[default=false];
-	optional bool            	boolean_9       	= 19	[default=false];
+    optional bytes               header              = 1    [default="\x1\xe0\xce"];
+    optional bool                boolean_0           = 10    [default=true];
+    optional bool                boolean_1           = 11    [default=false];
+    optional bool                boolean_2           = 12    [default=false];
+    optional bool                boolean_3           = 13    [default=false];
+    optional bool                boolean_4           = 14    [default=false];
+    optional bool                boolean_5           = 15    [default=false];
+    optional bool                boolean_6           = 16    [default=false];
+    optional bool                boolean_7           = 17    [default=false];
+    optional bool                boolean_8           = 18    [default=false];
+    optional bool                boolean_9           = 19    [default=false];
 }
 
 // ----------------------------------------------------------------------------
 message BoolSequence     {
-	optional bytes           	header          	= 2	[default="\x1\xe0\xce"];
-	repeated bool            	boolean_0       	= 10	[packed=true];
-	repeated bool            	boolean_1       	= 11	[packed=true];
+    optional bytes               header              = 2    [default="\x1\xe0\xce"];
+    repeated bool                boolean_0           = 10    [packed=true];
+    repeated bool                boolean_1           = 11    [packed=true];
 }
 
 // ----------------------------------------------------------------------------
 message ComplexMessage   {
-	optional bytes           	header          	= 9	[default="\x1\xe0\xce"];
-	repeated BoolOptional    	boolOptional    	= 1;
-	repeated BoolSequence    	boolSequence    	= 2;
-	repeated LongOptional    	longOptional    	= 3;
-	repeated LongSequence    	longSequence    	= 4;
-	repeated DoubleOptional  	doubleOptional  	= 5;
-	repeated DoubleSequence  	doubleSequence  	= 6;
-	repeated StringOptional  	stringOptional  	= 7;
-	repeated StringSequence  	stringSequence  	= 8;
+    optional bytes               header              = 9    [default="\x1\xe0\xce"];
+    repeated BoolOptional        boolOptional        = 1;
+    repeated BoolSequence        boolSequence        = 2;
+    repeated LongOptional        longOptional        = 3;
+    repeated LongSequence        longSequence        = 4;
+    repeated DoubleOptional      doubleOptional      = 5;
+    repeated DoubleSequence      doubleSequence      = 6;
+    repeated StringOptional      stringOptional      = 7;
+    repeated StringSequence      stringSequence      = 8;
 }
 
 // ----------------------------------------------------------------------------
 message DoubleOptional   {
-	optional bytes           	header          	= 5	[default="\x1\xe0\xce"];
-	optional double          	double_0        	= 30	[default=0];
-	optional double          	double_1        	= 31	[default=0];
-	optional double          	double_2        	= 32	[default=0];
-	optional double          	double_3        	= 33	[default=0];
-	optional double          	double_4        	= 34	[default=0];
-	optional double          	double_5        	= 35	[default=0];
-	optional double          	double_6        	= 36	[default=0];
-	optional double          	double_7        	= 37	[default=0];
-	optional double          	double_8        	= 38	[default=0];
-	optional double          	double_9        	= 39	[default=0];
+    optional bytes               header              = 5    [default="\x1\xe0\xce"];
+    optional double              double_0            = 30    [default=0];
+    optional double              double_1            = 31    [default=0];
+    optional double              double_2            = 32    [default=0];
+    optional double              double_3            = 33    [default=0];
+    optional double              double_4            = 34    [default=0];
+    optional double              double_5            = 35    [default=0];
+    optional double              double_6            = 36    [default=0];
+    optional double              double_7            = 37    [default=0];
+    optional double              double_8            = 38    [default=0];
+    optional double              double_9            = 39    [default=0];
 }
 
 // ----------------------------------------------------------------------------
 message DoubleSequence   {
-	optional bytes           	header          	= 6	[default="\x1\xe0\xce"];
-	repeated double          	double_0        	= 30	[packed=true];
-	repeated double          	double_1        	= 31	[packed=true];
+    optional bytes               header              = 6    [default="\x1\xe0\xce"];
+    repeated double              double_0            = 30    [packed=true];
+    repeated double              double_1            = 31    [packed=true];
 }
 
 // ----------------------------------------------------------------------------
 message LongOptional     {
-	optional bytes           	header          	= 3	[default="\x1\xe0\xce"];
-	optional int64           	long_0          	= 20	[default=1];
-	optional int64           	long_1          	= 21	[default=0];
-	optional int64           	long_2          	= 22	[default=0];
-	optional int64           	long_3          	= 23	[default=0];
-	optional int64           	long_4          	= 24	[default=0];
-	optional int64           	long_5          	= 25	[default=0];
-	optional int64           	long_6          	= 26	[default=0];
-	optional int64           	long_7          	= 27	[default=0];
-	optional int64           	long_8          	= 28	[default=0];
-	optional int64           	long_9          	= 29	[default=0];
+    optional bytes               header              = 3    [default="\x1\xe0\xce"];
+    optional int64               long_0              = 20    [default=1];
+    optional int64               long_1              = 21    [default=0];
+    optional int64               long_2              = 22    [default=0];
+    optional int64               long_3              = 23    [default=0];
+    optional int64               long_4              = 24    [default=0];
+    optional int64               long_5              = 25    [default=0];
+    optional int64               long_6              = 26    [default=0];
+    optional int64               long_7              = 27    [default=0];
+    optional int64               long_8              = 28    [default=0];
+    optional int64               long_9              = 29    [default=0];
 }
 
 // ----------------------------------------------------------------------------
 message LongSequence     {
-	optional bytes           	header          	= 4	[default="\x1\xe0\xce"];
-	repeated int64           	long_0          	= 20	[packed=true];
-	repeated int64           	long_1          	= 21	[packed=true];
+    optional bytes               header              = 4    [default="\x1\xe0\xce"];
+    repeated int64               long_0              = 20    [packed=true];
+    repeated int64               long_1              = 21    [packed=true];
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderAliasMsg {
-	optional bytes           	header          	= 159	[default="\x1\xe0\xce"];
+    optional bytes               header              = 159    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderCustomerSectionMsg {
-	optional bytes           	header          	= 122	[default="\x1\xe0\xce"];
+    optional bytes               header              = 122    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderDestinationSetMsg {
-	optional bytes           	header          	= 120	[default="\x1\xe0\xce"];
+    optional bytes               header              = 120    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 // message_cash_def.idl
 message StClientOrderInternalSectionMsg {
-	optional bytes           	header          	= 150	[default="\x1\xe0\xce"];
-	required StRoot          	stRoot          	= 124;	//message_def.idl
-	required SynapseMiscStFid	synapseMiscStFid	= 131;	//misc_def.idl
-	required SynapseObsClientCashStOrderDefInternalSection	synapseObsClientCashStOrderDefInternalSection	= 135;	//message_def.idl
+    optional bytes               header              = 150    [default="\x1\xe0\xce"];
+    required StRoot              stRoot              = 124;    //message_def.idl
+    required SynapseMiscStFid    synapseMiscStFid    = 131;    //misc_def.idl
+    required SynapseObsClientCashStOrderDefInternalSection    synapseObsClientCashStOrderDefInternalSection    = 135;    //message_def.idl
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderMergeMsg {
-	optional bytes           	header          	= 121	[default="\x1\xe0\xce"];
+    optional bytes               header              = 121    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderMsg {
-	optional bytes           	header          	= 157	[default="\x1\xe0\xce"];
+    optional bytes               header              = 157    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message StClientOrderStateMsg {
-	optional bytes           	header          	= 158	[default="\x1\xe0\xce"];
+    optional bytes               header              = 158    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 // misc_def.idl
 message StOrderRoutingInfo {
-	optional bytes           	header          	= 130	[default="\x1\xe0\xce"];
-	required int64           	ETargetSystem   	= 66	[default=0];	//StOrderRoutingInfo
-	required int64           	EKinematic      	= 67	[default=0];	//StOrderRoutingInfo
+    optional bytes               header              = 130    [default="\x1\xe0\xce"];
+    required int64               ETargetSystem       = 66    [default=0];    //StOrderRoutingInfo
+    required int64               EKinematic          = 67    [default=0];    //StOrderRoutingInfo
 }
 
 // ----------------------------------------------------------------------------
 // business_common_def.idl
 message StProductCode    {
-	optional bytes           	header          	= 141	[default="\x1\xe0\xce"];
-	required string          	sValue          	= 70	[default="0"];	//UIdT_Id
-	required int64           	EProductCodeType	= 108	[default=0];	//StProductCode
-	optional SynapseCommonStField	synapseCommonStField	= 143;	//common_def.idl replaced by PBART
+    optional bytes               header              = 141    [default="\x1\xe0\xce"];
+    required string              sValue              = 70    [default="0"];    //UIdT_Id
+    required int64               EProductCodeType    = 108    [default=0];    //StProductCode
+    optional SynapseCommonStField    synapseCommonStField    = 143;    //common_def.idl replaced by PBART
 }
 
 // ----------------------------------------------------------------------------
 // business_common_def.idl
 message StProductLeg     {
-	optional bytes           	header          	= 140	[default="\x1\xe0\xce"];
-	required int64           	synapseBusinessESide	= 85	[default=0];	//StOrderDefInternalSection
-	required int64           	quantity        	= 119	[default=0];
-	repeated StProductCode   	stProductCode   	= 141;	//business_common_def.idl
-	required SynapseCommonSeqFields	synapseCommonSeqFields	= 142;	//common_def.idl replaced by PBART
+    optional bytes               header              = 140    [default="\x1\xe0\xce"];
+    required int64               synapseBusinessESide    = 85    [default=0];    //StOrderDefInternalSection
+    required int64               quantity            = 119    [default=0];
+    repeated StProductCode       stProductCode       = 141;    //business_common_def.idl
+    required SynapseCommonSeqFields    synapseCommonSeqFields    = 142;    //common_def.idl replaced by PBART
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message StRdvClientOrderStatistics {
-	optional bytes           	header          	= 129	[default="\x1\xe0\xce"];
-	required SynapseMiscStFid	synapseMiscStFid	= 131;	//misc_def.idl
-	repeated SynapseCommonStatistic	synapseCommonStatistic	= 132;	//common_def.idl
+    optional bytes               header              = 129    [default="\x1\xe0\xce"];
+    required SynapseMiscStFid    synapseMiscStFid    = 131;    //misc_def.idl
+    repeated SynapseCommonStatistic    synapseCommonStatistic    = 132;    //common_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message StRdvExecutionStatistics {
-	optional bytes           	header          	= 127	[default="\x1\xe0\xce"];
-	required SynapseMiscStFid	synapseMiscStFid	= 131;	//misc_def.idl
-	repeated SynapseCommonStatistic	synapseCommonStatistic	= 132;	//common_def.idl
+    optional bytes               header              = 127    [default="\x1\xe0\xce"];
+    required SynapseMiscStFid    synapseMiscStFid    = 131;    //misc_def.idl
+    repeated SynapseCommonStatistic    synapseCommonStatistic    = 132;    //common_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message StRdvMarketOrderStatistics {
-	optional bytes           	header          	= 128	[default="\x1\xe0\xce"];
-	required SynapseMiscStFid	synapseMiscStFid	= 131;	//misc_def.idl
-	repeated SynapseCommonStatistic	synapseCommonStatistic	= 132;	//common_def.idl
+    optional bytes               header              = 128    [default="\x1\xe0\xce"];
+    required SynapseMiscStFid    synapseMiscStFid    = 131;    //misc_def.idl
+    repeated SynapseCommonStatistic    synapseCommonStatistic    = 132;    //common_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message StRdvStatistics  {
-	optional bytes           	header          	= 125	[default="\x1\xe0\xce"];
-	required int64           	start           	= 63	[default=0];	//StRdvStatistics
-	required int64           	rdvMsgId        	= 64	[default=0];	//StRdvStatistics
-	required int64           	rdvMsgFailure   	= 65	[default=0];	//StRdvStatistics
+    optional bytes               header              = 125    [default="\x1\xe0\xce"];
+    required int64               start               = 63    [default=0];    //StRdvStatistics
+    required int64               rdvMsgId            = 64    [default=0];    //StRdvStatistics
+    required int64               rdvMsgFailure       = 65    [default=0];    //StRdvStatistics
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message StRoot           {
-	optional bytes           	header          	= 124	[default="\x1\xe0\xce"];
-	optional int64           	lastPurgedRecID 	= 50	[default=0];	//StRoot
-	required int64           	eventId         	= 51	[default=0];	//StRoot
-	required string          	type            	= 52	[default="0"];	//StRoot
-	required string          	eventName       	= 53	[default="0"];	//StRoot
-	required string          	subEventName    	= 54	[default="0"];	//StRoot
-	required bool            	transientData   	= 55	[default=false];	//StRoot
-	optional int64           	EDAEventID      	= 56	[default=0];	//StRoot
-	optional int64           	lastRecIDReloaded	= 57	[default=0];	//StRoot
-	optional int64           	lastEDAIDReloaded	= 58	[default=0];	//StRoot
-	optional int64           	lastPurgeTimestamp	= 59	[default=0];	//StRoot
-	optional int64           	lastRecIDBeforePurge	= 60	[default=0];	//StRoot
-	optional int64           	uniqueEventID   	= 61	[default=0];	//StRoot
-	required int64           	EMessageType    	= 62	[default=0];	//StRoot
-	optional StRdvStatistics 	stRdvStatistics 	= 125;	//message_def.idl
-	repeated URdvStatistics  	uRdvStatistics  	= 126;	//message_def.idl
+    optional bytes               header              = 124    [default="\x1\xe0\xce"];
+    optional int64               lastPurgedRecID     = 50    [default=0];    //StRoot
+    required int64               eventId             = 51    [default=0];    //StRoot
+    required string              type                = 52    [default="0"];    //StRoot
+    required string              eventName           = 53    [default="0"];    //StRoot
+    required string              subEventName        = 54    [default="0"];    //StRoot
+    required bool                transientData       = 55    [default=false];    //StRoot
+    optional int64               EDAEventID          = 56    [default=0];    //StRoot
+    optional int64               lastRecIDReloaded    = 57    [default=0];    //StRoot
+    optional int64               lastEDAIDReloaded    = 58    [default=0];    //StRoot
+    optional int64               lastPurgeTimestamp    = 59    [default=0];    //StRoot
+    optional int64               lastRecIDBeforePurge    = 60    [default=0];    //StRoot
+    optional int64               uniqueEventID       = 61    [default=0];    //StRoot
+    required int64               EMessageType        = 62    [default=0];    //StRoot
+    optional StRdvStatistics     stRdvStatistics     = 125;    //message_def.idl
+    repeated URdvStatistics      uRdvStatistics      = 126;    //message_def.idl
 }
 
 // ----------------------------------------------------------------------------
 message StringOptional   {
-	optional bytes           	header          	= 7	[default="\x1\xe0\xce"];
-	optional string          	string_0        	= 40	[default=""];
-	optional string          	string_1        	= 41	[default=""];
-	optional string          	string_2        	= 42	[default=""];
-	optional string          	string_3        	= 43	[default=""];
-	optional string          	string_4        	= 44	[default=""];
-	optional string          	string_5        	= 45	[default=""];
-	optional string          	string_6        	= 46	[default=""];
-	optional string          	string_7        	= 47	[default=""];
-	optional string          	string_8        	= 48	[default=""];
-	optional string          	string_9        	= 49	[default=""];
+    optional bytes               header              = 7    [default="\x1\xe0\xce"];
+    optional string              string_0            = 40    [default=""];
+    optional string              string_1            = 41    [default=""];
+    optional string              string_2            = 42    [default=""];
+    optional string              string_3            = 43    [default=""];
+    optional string              string_4            = 44    [default=""];
+    optional string              string_5            = 45    [default=""];
+    optional string              string_6            = 46    [default=""];
+    optional string              string_7            = 47    [default=""];
+    optional string              string_8            = 48    [default=""];
+    optional string              string_9            = 49    [default=""];
 }
 
 // ----------------------------------------------------------------------------
 message StringSequence   {
-	optional bytes           	header          	= 8	[default="\x1\xe0\xce"];
-	repeated string          	string_0        	= 40;
-	repeated string          	string_1        	= 41;
+    optional bytes               header              = 8    [default="\x1\xe0\xce"];
+    repeated string              string_0            = 40;
+    repeated string              string_1            = 41;
 }
 
 // ----------------------------------------------------------------------------
 // message_cash_def.idl
 message UEventData       {
-	optional bytes           	header          	= 123	[default="\x1\xe0\xce"];
-	optional StClientOrderDestinationSetMsg	stClientOrderDestinationSetMsg	= 120;
-	optional StClientOrderMergeMsg	stClientOrderMergeMsg	= 121;
-	optional StClientOrderCustomerSectionMsg	stClientOrderCustomerSectionMsg	= 122;
-	optional StClientOrderInternalSectionMsg	stClientOrderInternalSectionMsg	= 150;	//message_cash_def.idl
-	optional SynapseMessageStListedExecMsg	synapseMessageStListedExecMsg	= 151;
-	optional SynapseMessageStOTCExecMsg	synapseMessageStOTCExecMsg	= 152;
-	optional SynapseMessageStCrossExecMsg	synapseMessageStCrossExecMsg	= 153;
-	optional SynapseMessageStReallocateExecMsg	synapseMessageStReallocateExecMsg	= 154;
-	optional SynapseMessageStMarketOrderMsg	synapseMessageStMarketOrderMsg	= 155;
-	optional SynapseMessageStMarketOrderCancelMsg	synapseMessageStMarketOrderCancelMsg	= 156;
-	optional StClientOrderMsg	stClientOrderMsg	= 157;
-	optional StClientOrderStateMsg	stClientOrderStateMsg	= 158;
-	optional StClientOrderAliasMsg	stClientOrderAliasMsg	= 159;
+    optional bytes               header              = 123    [default="\x1\xe0\xce"];
+    optional StClientOrderDestinationSetMsg    stClientOrderDestinationSetMsg    = 120;
+    optional StClientOrderMergeMsg    stClientOrderMergeMsg    = 121;
+    optional StClientOrderCustomerSectionMsg    stClientOrderCustomerSectionMsg    = 122;
+    optional StClientOrderInternalSectionMsg    stClientOrderInternalSectionMsg    = 150;    //message_cash_def.idl
+    optional SynapseMessageStListedExecMsg    synapseMessageStListedExecMsg    = 151;
+    optional SynapseMessageStOTCExecMsg    synapseMessageStOTCExecMsg    = 152;
+    optional SynapseMessageStCrossExecMsg    synapseMessageStCrossExecMsg    = 153;
+    optional SynapseMessageStReallocateExecMsg    synapseMessageStReallocateExecMsg    = 154;
+    optional SynapseMessageStMarketOrderMsg    synapseMessageStMarketOrderMsg    = 155;
+    optional SynapseMessageStMarketOrderCancelMsg    synapseMessageStMarketOrderCancelMsg    = 156;
+    optional StClientOrderMsg    stClientOrderMsg    = 157;
+    optional StClientOrderStateMsg    stClientOrderStateMsg    = 158;
+    optional StClientOrderAliasMsg    stClientOrderAliasMsg    = 159;
 }
 
 // ----------------------------------------------------------------------------
 // misc_def.idl
 message UIdT_Id          {
-	optional bytes           	header          	= 133	[default="\x1\xe0\xce"];
-	optional int64           	lValue          	= 69	[default=0];	//UIdT_Id
-	optional string          	sValue          	= 70	[default="0"];	//UIdT_Id
+    optional bytes               header              = 133    [default="\x1\xe0\xce"];
+    optional int64               lValue              = 69    [default=0];    //UIdT_Id
+    optional string              sValue              = 70    [default="0"];    //UIdT_Id
 }
 
 // ----------------------------------------------------------------------------
 // misc_def.idl
 message UIdT_subId       {
-	optional bytes           	header          	= 134	[default="\x1\xe0\xce"];
-	optional int64           	lValue          	= 69	[default=0];	//UIdT_Id
-	optional string          	sValue          	= 70	[default="0"];	//UIdT_Id
+    optional bytes               header              = 134    [default="\x1\xe0\xce"];
+    optional int64               lValue              = 69    [default=0];    //UIdT_Id
+    optional string              sValue              = 70    [default="0"];    //UIdT_Id
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message URdvStatistics   {
-	optional bytes           	header          	= 126	[default="\x1\xe0\xce"];
-	optional StRdvExecutionStatistics	stRdvExecutionStatistics	= 127;	//message_def.idl
-	optional StRdvMarketOrderStatistics	stRdvMarketOrderStatistics	= 128;	//message_def.idl
-	optional StRdvClientOrderStatistics	stRdvClientOrderStatistics	= 129;	//message_def.idl
+    optional bytes               header              = 126    [default="\x1\xe0\xce"];
+    optional StRdvExecutionStatistics    stRdvExecutionStatistics    = 127;    //message_def.idl
+    optional StRdvMarketOrderStatistics    stRdvMarketOrderStatistics    = 128;    //message_def.idl
+    optional StRdvClientOrderStatistics    stRdvClientOrderStatistics    = 129;    //message_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // business_common_def.idl
 message SynapseBusinessStProductDef {
-	optional bytes           	header          	= 139	[default="\x1\xe0\xce"];
-	required bool            	isStrategy      	= 107	[default=false];	//StOrderDefInternalSection
-	repeated StProductLeg    	stProductLeg    	= 140;	//business_common_def.idl
-	repeated StProductCode   	stProductCode   	= 141;	//business_common_def.idl
-	required SynapseCommonSeqFields	synapseCommonSeqFields	= 142;	//common_def.idl replaced by PBART
+    optional bytes               header              = 139    [default="\x1\xe0\xce"];
+    required bool                isStrategy          = 107    [default=false];    //StOrderDefInternalSection
+    repeated StProductLeg        stProductLeg        = 140;    //business_common_def.idl
+    repeated StProductCode       stProductCode       = 141;    //business_common_def.idl
+    required SynapseCommonSeqFields    synapseCommonSeqFields    = 142;    //common_def.idl replaced by PBART
 }
 
 // ----------------------------------------------------------------------------
 // common_def.idl replaced by PBART
 message SynapseCommonSeqFields {
-	optional bytes           	header          	= 142	[default="\x1\xe0\xce"];
-	required string          	name1           	= 112	[default="0"];	//synapse::common::SeqFields
-	required string          	name2           	= 113	[default="0"];	//synapse::common::SeqFields
-	required string          	name3           	= 114	[default="0"];	//synapse::common::SeqFields
-	required string          	name4           	= 115	[default="0"];	//synapse::common::SeqFields
-	required string          	name5           	= 116	[default="0"];	//synapse::common::SeqFields
-	required string          	name6           	= 117	[default="0"];	//synapse::common::SeqFields
+    optional bytes               header              = 142    [default="\x1\xe0\xce"];
+    required string              name1               = 112    [default="0"];    //synapse::common::SeqFields
+    required string              name2               = 113    [default="0"];    //synapse::common::SeqFields
+    required string              name3               = 114    [default="0"];    //synapse::common::SeqFields
+    required string              name4               = 115    [default="0"];    //synapse::common::SeqFields
+    required string              name5               = 116    [default="0"];    //synapse::common::SeqFields
+    required string              name6               = 117    [default="0"];    //synapse::common::SeqFields
 }
 
 // ----------------------------------------------------------------------------
 // common_def.idl replaced by PBART
 message SynapseCommonStField {
-	optional bytes           	header          	= 143	[default="\x1\xe0\xce"];
-	required string          	myName          	= 110	[default="0"];	//synapse::common::StField
+    optional bytes               header              = 143    [default="\x1\xe0\xce"];
+    required string              myName              = 110    [default="0"];    //synapse::common::StField
 }
 
 // ----------------------------------------------------------------------------
 // common_def.idl
 message SynapseCommonStatistic {
-	optional bytes           	header          	= 132	[default="\x1\xe0\xce"];
-	required string          	name            	= 71	[default="0"];	//synapse::common::Statistic
+    optional bytes               header              = 132    [default="\x1\xe0\xce"];
+    required string              name                = 71    [default="0"];    //synapse::common::Statistic
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStCrossExecMsg {
-	optional bytes           	header          	= 153	[default="\x1\xe0\xce"];
+    optional bytes               header              = 153    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStListedExecMsg {
-	optional bytes           	header          	= 151	[default="\x1\xe0\xce"];
+    optional bytes               header              = 151    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStMarketOrderCancelMsg {
-	optional bytes           	header          	= 156	[default="\x1\xe0\xce"];
+    optional bytes               header              = 156    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStMarketOrderMsg {
-	optional bytes           	header          	= 155	[default="\x1\xe0\xce"];
+    optional bytes               header              = 155    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStOTCExecMsg {
-	optional bytes           	header          	= 152	[default="\x1\xe0\xce"];
+    optional bytes               header              = 152    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 message SynapseMessageStReallocateExecMsg {
-	optional bytes           	header          	= 154	[default="\x1\xe0\xce"];
+    optional bytes               header              = 154    [default="\x1\xe0\xce"];
 }
 
 // ----------------------------------------------------------------------------
 // misc_def.idl
 message SynapseMiscStBookingCode {
-	optional bytes           	header          	= 137	[default="\x1\xe0\xce"];
-	required string          	sValue          	= 70	[default="0"];	//UIdT_Id
-	required int64           	EBookingCodeType	= 102	[default=0];	//synapse::misc::StBookingCode
+    optional bytes               header              = 137    [default="\x1\xe0\xce"];
+    required string              sValue              = 70    [default="0"];    //UIdT_Id
+    required int64               EBookingCodeType    = 102    [default=0];    //synapse::misc::StBookingCode
 }
 
 // ----------------------------------------------------------------------------
 // misc_def.idl
 message SynapseMiscStFid {
-	optional bytes           	header          	= 131	[default="\x1\xe0\xce"];
-	required int64           	EForeignSystem  	= 68	[default=0];	//synapse::misc::StFid
-	required UIdT_Id         	uIdT_Id         	= 133;	//misc_def.idl
-	required UIdT_subId      	uIdT_subId      	= 134;	//misc_def.idl
+    optional bytes               header              = 131    [default="\x1\xe0\xce"];
+    required int64               EForeignSystem      = 68    [default=0];    //synapse::misc::StFid
+    required UIdT_Id             uIdT_Id             = 133;    //misc_def.idl
+    required UIdT_subId          uIdT_subId          = 134;    //misc_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // obs_client_order_def.idl
 message SynapseObsClientStClientConnectivityInfo {
-	optional bytes           	header          	= 138	[default="\x1\xe0\xce"];
-	required string          	clientAccountId 	= 103	[default="0"];	//StClientConnectivityInfo
-	required string          	investorId      	= 104	[default="0"];	//StClientConnectivityInfo
-	required string          	connectivityIssuerId	= 105	[default="0"];	//StClientConnectivityInfo
-	required string          	terminalId      	= 106	[default="0"];	//StClientConnectivityInfo
+    optional bytes               header              = 138    [default="\x1\xe0\xce"];
+    required string              clientAccountId     = 103    [default="0"];    //StClientConnectivityInfo
+    required string              investorId          = 104    [default="0"];    //StClientConnectivityInfo
+    required string              connectivityIssuerId    = 105    [default="0"];    //StClientConnectivityInfo
+    required string              terminalId          = 106    [default="0"];    //StClientConnectivityInfo
 }
 
 // ----------------------------------------------------------------------------
 // obs_client_order_def.idl
 message SynapseObsClientStClientId {
-	optional bytes           	header          	= 136	[default="\x1\xe0\xce"];
-	required string          	crds            	= 99	[default="0"];	//synapse::obs::client::StClientId
-	required string          	mnemo           	= 100	[default="0"];	//synapse::obs::client::StClientId
-	required string          	account         	= 101	[default="0"];	//synapse::obs::client::StClientId
-	required SynapseMiscStBookingCode	synapseMiscStBookingCode	= 137;	//misc_def.idl
+    optional bytes               header              = 136    [default="\x1\xe0\xce"];
+    required string              crds                = 99    [default="0"];    //synapse::obs::client::StClientId
+    required string              mnemo               = 100    [default="0"];    //synapse::obs::client::StClientId
+    required string              account             = 101    [default="0"];    //synapse::obs::client::StClientId
+    required SynapseMiscStBookingCode    synapseMiscStBookingCode    = 137;    //misc_def.idl
 }
 
 // ----------------------------------------------------------------------------
 // message_def.idl
 message SynapseObsClientCashStOrderDefInternalSection {
-	optional bytes           	header          	= 135	[default="\x1\xe0\xce"];
-	required string          	marketPlace     	= 72	[default="0"];	//StOrderDefInternalSection
-	required string          	marketSegment   	= 73	[default="0"];	//StOrderDefInternalSection
-	required string          	exchangeCode    	= 74	[default="0"];	//StOrderDefInternalSection
-	optional string          	activity        	= 75	[default="0"];	//StOrderDefInternalSection
-	required string          	portfolio       	= 76	[default="0"];	//StOrderDefInternalSection
-	optional string          	profitCenter    	= 77	[default="0"];	//StOrderDefInternalSection
-	required string          	creator         	= 78	[default="0"];	//StOrderDefInternalSection
-	optional string          	lastTrader      	= 79	[default="0"];	//StOrderDefInternalSection
-	optional string          	SaleInCharge    	= 80	[default="0"];	//StOrderDefInternalSection
-	optional string          	visibilityGroup 	= 81	[default="0"];	//StOrderDefInternalSection
-	optional string          	handlingCode    	= 82	[default="0"];	//StOrderDefInternalSection
-	required int64           	synapseBusinessOrderETradingMode	= 83	[default=0];	//StOrderDefInternalSection
-	required int64           	synapseCommonECurrency	= 84	[default=0];	//StOrderDefInternalSection
-	required int64           	synapseBusinessESide	= 85	[default=0];	//StOrderDefInternalSection
-	required int64           	synapseBusinessOrderEBookingType	= 86	[default=0];	//StOrderDefInternalSection
-	optional string          	hardToBorrowInfo	= 87	[default="0"];	//StOrderDefInternalSection
-	required int64           	synapseBusinessOrderEMarginInfo	= 88	[default=0];	//StOrderDefInternalSection
-	required int64           	synapseMiscEBookingState	= 89	[default=0];	//StOrderDefInternalSection
-	required bool            	isNonStandardSettlement	= 90	[default=false];	//StOrderDefInternalSection
-	required bool            	isGuarantedOrder	= 91	[default=false];	//StOrderDefInternalSection
-	required bool            	isHardToBorrow  	= 92	[default=false];	//StOrderDefInternalSection
-	required bool            	isCSA           	= 93	[default=false];	//StOrderDefInternalSection
-	required bool            	isRealTimeExec  	= 94	[default=false];	//StOrderDefInternalSection
-	required bool            	isSRD           	= 95	[default=false];	//StOrderDefInternalSection
-	required bool            	isContinuousTradingOnly	= 96	[default=false];	//StOrderDefInternalSection
-	required bool            	isOutCry        	= 97	[default=false];	//StOrderDefInternalSection
-	required bool            	sollicited      	= 98	[default=false];	//StOrderDefInternalSection
-	required double          	synapseCommonUTime	= 109	[default=0];	//StOrderDefInternalSection
-	required double          	synapseCommonStDateTime	= 118	[default=0];	//StOrderDefInternalSection
-	required SynapseObsClientStClientId	synapseObsClientStClientId	= 136;	//obs_client_order_def.idl
-	optional SynapseObsClientStClientConnectivityInfo	synapseObsClientStClientConnectivityInfo	= 138;	//obs_client_order_def.idl
-	required SynapseBusinessStProductDef	synapseBusinessStProductDef	= 139;	//business_common_def.idl
-	required SynapseCommonSeqFields	synapseCommonSeqFields	= 142;	//common_def.idl replaced by PBART
+    optional bytes               header              = 135    [default="\x1\xe0\xce"];
+    required string              marketPlace         = 72    [default="0"];    //StOrderDefInternalSection
+    required string              marketSegment       = 73    [default="0"];    //StOrderDefInternalSection
+    required string              exchangeCode        = 74    [default="0"];    //StOrderDefInternalSection
+    optional string              activity            = 75    [default="0"];    //StOrderDefInternalSection
+    required string              portfolio           = 76    [default="0"];    //StOrderDefInternalSection
+    optional string              profitCenter        = 77    [default="0"];    //StOrderDefInternalSection
+    required string              creator             = 78    [default="0"];    //StOrderDefInternalSection
+    optional string              lastTrader          = 79    [default="0"];    //StOrderDefInternalSection
+    optional string              SaleInCharge        = 80    [default="0"];    //StOrderDefInternalSection
+    optional string              visibilityGroup     = 81    [default="0"];    //StOrderDefInternalSection
+    optional string              handlingCode        = 82    [default="0"];    //StOrderDefInternalSection
+    required int64               synapseBusinessOrderETradingMode    = 83    [default=0];    //StOrderDefInternalSection
+    required int64               synapseCommonECurrency    = 84    [default=0];    //StOrderDefInternalSection
+    required int64               synapseBusinessESide    = 85    [default=0];    //StOrderDefInternalSection
+    required int64               synapseBusinessOrderEBookingType    = 86    [default=0];    //StOrderDefInternalSection
+    optional string              hardToBorrowInfo    = 87    [default="0"];    //StOrderDefInternalSection
+    required int64               synapseBusinessOrderEMarginInfo    = 88    [default=0];    //StOrderDefInternalSection
+    required int64               synapseMiscEBookingState    = 89    [default=0];    //StOrderDefInternalSection
+    required bool                isNonStandardSettlement    = 90    [default=false];    //StOrderDefInternalSection
+    required bool                isGuarantedOrder    = 91    [default=false];    //StOrderDefInternalSection
+    required bool                isHardToBorrow      = 92    [default=false];    //StOrderDefInternalSection
+    required bool                isCSA               = 93    [default=false];    //StOrderDefInternalSection
+    required bool                isRealTimeExec      = 94    [default=false];    //StOrderDefInternalSection
+    required bool                isSRD               = 95    [default=false];    //StOrderDefInternalSection
+    required bool                isContinuousTradingOnly    = 96    [default=false];    //StOrderDefInternalSection
+    required bool                isOutCry            = 97    [default=false];    //StOrderDefInternalSection
+    required bool                sollicited          = 98    [default=false];    //StOrderDefInternalSection
+    required double              synapseCommonUTime    = 109    [default=0];    //StOrderDefInternalSection
+    required double              synapseCommonStDateTime    = 118    [default=0];    //StOrderDefInternalSection
+    required SynapseObsClientStClientId    synapseObsClientStClientId    = 136;    //obs_client_order_def.idl
+    optional SynapseObsClientStClientConnectivityInfo    synapseObsClientStClientConnectivityInfo    = 138;    //obs_client_order_def.idl
+    required SynapseBusinessStProductDef    synapseBusinessStProductDef    = 139;    //business_common_def.idl
+    required SynapseCommonSeqFields    synapseCommonSeqFields    = 142;    //common_def.idl replaced by PBART
 }

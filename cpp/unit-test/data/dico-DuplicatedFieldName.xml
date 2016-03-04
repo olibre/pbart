@@ -5,13 +5,13 @@
   <FieldsDef>
     <FieldDef name="Qty" id="1" type="LONG"   deprecated="false" comment="First occurence" />
     <FieldDef name="Pos" id="2" type="BOOL"   deprecated="true"  comment="Position longue" />
-	<FieldDef name="pos" id="3" type="bool"   deprecated="false" comment="Position longue" />
-	<FieldDef name="Po1" id="4" type="String" deprecated="false" comment="Position longue" />
-	<FieldDef name="Po2" id="5" type="bool"   deprecated="true"  comment="Position longue" />
-	<FieldDef name="Po3" id="6" type="BOOL"   deprecated="false" comment="Position longue" />
-	<FieldDef name="Po4" id="9" type="long"   deprecated="false" comment="Position longue" />
-	<FieldDef name="Po5" id="8" type="double" deprecated="false" comment="Position longue" />
-	<FieldDef name="Qty" id="9" type="Double" deprecated="true"  comment="Duplicated field" />
+    <FieldDef name="pos" id="3" type="bool"   deprecated="false" comment="Position longue" />
+    <FieldDef name="Po1" id="4" type="String" deprecated="false" comment="Position longue" />
+    <FieldDef name="Po2" id="5" type="bool"   deprecated="true"  comment="Position longue" />
+    <FieldDef name="Po3" id="6" type="BOOL"   deprecated="false" comment="Position longue" />
+    <FieldDef name="Po4" id="9" type="long"   deprecated="false" comment="Position longue" />
+    <FieldDef name="Po5" id="8" type="double" deprecated="false" comment="Position longue" />
+    <FieldDef name="Qty" id="9" type="Double" deprecated="true"  comment="Duplicated field" />
   </FieldsDef>
 
   <MessagesDef>

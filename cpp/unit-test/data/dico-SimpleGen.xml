@@ -18,11 +18,11 @@
       <Field name="Prc"  required="false" repeated="false" default="5.5" />
       <Field name="Qty"  required="true"  repeated="false" default="555" />
     </MessageDef>
-	
+
     <MessageDef id="11" name="MessageVide" deprecated="false" comment="for test">
       <!-- no field -->
     </MessageDef>
-	
+
     <MessageDef id="12" name="MarketStOrder" deprecated="false" comment="sub-Msg">
       <Field   name="isSent"              required="true"  repeated="false" default="true" />
       <Message name="ClientcashStOrder" required="true"  repeated="false"   />
@@ -33,7 +33,7 @@
     <MessageDef id="13" name="ForceV3StOrder" deprecated="true" comment="unused">
       <Field name="Reason" required="false" repeated="false" default="cinquante cinq" />
     </MessageDef>
-	
+
   </MessagesDef>
 
 </Dico>

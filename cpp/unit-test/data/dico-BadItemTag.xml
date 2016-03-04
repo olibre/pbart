@@ -24,7 +24,7 @@
     <FieldDef id="27" name="Qty7" type="long"   deprecated="false" comment="Volume" />
     <FieldDef id="28" name="Qty8" type="long"   deprecated="false" comment="Volume" />
     <FieldDef id="29" name="Qty9" type="long"   deprecated="false" comment="Volume" />
-	
+
     <FieldDef id="30" name="Prc0" type="double" deprecated="false" comment="Volume" />
     <FieldDef id="31" name="Prc1" type="double" deprecated="false" comment="Volume" />
     <FieldDef id="32" name="Prc2" type="double" deprecated="false" comment="Volume" />
@@ -61,7 +61,7 @@
       <Field name="Has8" default="0" required="false" repeated="false" />
       <Field name="Has9" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="92" name="MsgQty" deprecated="false" comment="Long fields">
       <Field name="Qty0" default="0" required="false" repeated="false" />
       <Field name="Qty1" default="0" required="false" repeated="false" />
@@ -74,7 +74,7 @@
       <Field name="Qty8" default="0" required="false" repeated="false" />
       <Field name="Qty9" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="93" name="MsgPrc" deprecated="false" comment="Double fields">
       <Field name="Prc0" default="0" required="false" repeated="false" />
       <Field name="Prc1" default="0" required="false" repeated="false" />
@@ -87,7 +87,7 @@
       <Field name="Prc8" default="0" required="false" repeated="false" />
       <Field name="Prc9" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="94" name="MsgStr" deprecated="false" comment="String fields">
       <Field name="Str0" default="0" required="false" repeated="false" />
       <Field name="Str1" default="0" required="false" repeated="false" />
@@ -100,55 +100,55 @@
       <Field name="Str8" default="0" required="false" repeated="false" />
       <Field name="Str9" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="911" name="SeqHas" deprecated="false" comment="">
       <Field name="Has0" default="0" required="false" repeated="true" />
       <Field name="Has1" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="912" name="SeqQty" deprecated="false" comment="">
       <Field name="Qty0" default="0" required="false" repeated="true" />
       <Field name="Qty1" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="913" name="SeqPrc" deprecated="false" comment="">
       <Field name="Prc0" default="0" required="false" repeated="true" />
       <Field name="Prc1" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="914" name="SeqStr" deprecated="false" comment="">
       <Field name="Str0" default="0" required="false" repeated="true" />
       <Field name="Str1" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="920" name="MsgMsg" deprecated="false" comment="">
       <Message name="MsgHas" default="0" required="false" repeated="false" />
       <Message name="MsgQty" default="0" required="false" repeated="false" />
       <Message name="MsgPrc" default="0" required="false" repeated="false" />
       <Message name="MsgStr" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="930" name="MsgSeq" deprecated="false" comment="">
       <Message name="SeqHas" default="0" required="false" repeated="false" />
       <Message name="SeqQty" default="0" required="false" repeated="false" />
       <Message name="SeqPrc" default="0" required="false" repeated="false" />
       <Message name="SeqStr" default="0" required="false" repeated="false" />
     </MessageDef>
-	
+
     <MessageDef id="940" name="SeqMsg" deprecated="false" comment="">
       <Message name="MsgHas" default="0" required="false" repeated="true" />
       <Message name="MsgQty" default="0" required="false" repeated="true" />
       <Message name="MsgPrc" default="0" required="false" repeated="true" />
       <Message name="MsgStr" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="950" name="SeqSeq" deprecated="false" comment="">
       <Message name="SeqHas" default="0" required="false" repeated="true" />
       <Message name="SeqQty" default="0" required="false" repeated="true" />
       <Message name="SeqPrc" default="0" required="false" repeated="true" />
       <Message name="SeqStr" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="960" name="MsgAll" deprecated="false" comment="">
       <Field   name="Has0"   default="0" required="false" repeated="false" />
       <Field   name="Qty1"   default="0" required="false" repeated="false" />

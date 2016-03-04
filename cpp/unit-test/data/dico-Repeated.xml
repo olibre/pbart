@@ -18,22 +18,22 @@
       <Field name="Prc"  default="0" required="false" repeated="true" />
       <Field name="Qty"  default="0" required="true"  repeated="true" />
     </MessageDef>
-	
+
     <MessageDef id="93" name="StEmpty" deprecated="false" comment="for test">
       <!-- no field -->
     </MessageDef>
-	
+
     <MessageDef id="94" name="market.StOrder" deprecated="false" comment="sub-Msg">
       <Field   name="isSent"              default="0" required="true"  repeated="true" />
       <Message name="client.cash.StOrder" default="0" required="true"  repeated="true" />
-	    <Field   name="Reason"              default="0" required="false" repeated="true" />
+        <Field   name="Reason"              default="0" required="false" repeated="true" />
     </MessageDef>
 
     <!-- put deprecated messages after this comment-->
     <MessageDef id="92" name="forceV3.StOrder" deprecated="true" comment="unused">
       <Field name="Reason" default="0" required="false" repeated="true" />
     </MessageDef>
-	
+
   </MessagesDef>
 
 </Dico>
