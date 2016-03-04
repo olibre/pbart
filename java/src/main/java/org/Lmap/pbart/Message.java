@@ -6,8 +6,8 @@
  *  Pbart is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License (AGPL)
  *  version 3 or (at your option) any later version.
- * 
- *  You should have received a copy of the GNU Affero General Public License 
+ *
+ *  You should have received a copy of the GNU Affero General Public License
  *  along with Pbart (maybe in file LICENSE).
  *  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -238,26 +238,26 @@ public class Message {
     private native boolean native_isRequired     (long handle, int id);
     private native boolean native_isDeprecated   (long handle, int id);
     private native int     native_getType        (long handle, int id, boolean s);
-    
+
     private native boolean native_getBool        (long handle, int id)                   throws IdException, TypeException;
     private native long    native_getLong        (long handle, int id)                   throws IdException, TypeException;
     private native double  native_getDouble      (long handle, int id)                   throws IdException, TypeException;
     private native String  native_getString      (long handle, int id)                   throws IdException, TypeException;
     private native long    native_cloneMessage   (long handle, int id)                   throws IdException, TypeException;
-    
+
     private native int     native_getSeqSize     (long handle, int id)                   throws IdException;
     private native boolean native_getSeqBool     (long handle, int id, int i)            throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native long    native_getSeqLong     (long handle, int id, int i)            throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native double  native_getSeqDouble   (long handle, int id, int i)            throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native String  native_getSeqString   (long handle, int id, int i)            throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native long    native_cloneSeqMessage(long handle, int id, int i)            throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
-    
+
     private native void    native_setBool        (long handle, int id, boolean v)        throws IdException, TypeException;
     private native void    native_setLong        (long handle, int id, long    v)        throws IdException, TypeException;
     private native void    native_setDouble      (long handle, int id, double  v)        throws IdException, TypeException;
     private native void    native_setString      (long handle, int id, String  v)        throws IdException, TypeException;
     private native void    native_setMessage     (long handle, int id, long message)     throws IdException, TypeException;
-    
+
     private native void    native_setSeqBool     (long handle, int id, int i, boolean v) throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native void    native_setSeqLong     (long handle, int id, int i, long    v) throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;
     private native void    native_setSeqDouble   (long handle, int id, int i, double  v) throws IdException, TypeException, java.lang.ArrayIndexOutOfBoundsException;

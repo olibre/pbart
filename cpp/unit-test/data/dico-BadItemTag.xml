@@ -2,7 +2,7 @@
 
 <Dico version="1.0.0" xsd="1.0.0" env="dev">
 
-  <FieldsDef> 
+  <FieldsDef>
     <FieldDef id="10" name="Has0" type="bool"   deprecated="false" comment="Volume" />
     <FieldDef id="11" name="Has1" type="bool"   deprecated="false" comment="Volume" />
     <FieldDef id="12" name="Has2" type="bool"   deprecated="false" comment="Volume" />
@@ -190,5 +190,5 @@
     </MessageDef>
 
   </MessagesDef>
-  
+
 </Dico>

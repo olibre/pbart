@@ -60,7 +60,7 @@
       <Field   name="boolean_7"           default="0" required="false"  repeated="false" />
       <Field   name="boolean_8"           default="0" required="false"  repeated="false" />
       <Field   name="boolean_9"           default="0" required="false"  repeated="false" />
-    </MessageDef>  
+    </MessageDef>
     <MessageDef id="3" name="LongOptional" deprecated="false" comment="">
       <Field   name="long_0"           default="1" required="false"  repeated="false" />
       <Field   name="long_1"           default="0" required="false"  repeated="false" />
@@ -72,7 +72,7 @@
       <Field   name="long_7"           default="0" required="false"  repeated="false" />
       <Field   name="long_8"           default="0" required="false"  repeated="false" />
       <Field   name="long_9"           default="0" required="false"  repeated="false" />
-    </MessageDef>  
+    </MessageDef>
     <MessageDef id="5" name="DoubleOptional" deprecated="false" comment="">
       <Field   name="double_0"           default="0" required="false"  repeated="false" />
       <Field   name="double_1"           default="0" required="false"  repeated="false" />
@@ -96,7 +96,7 @@
       <Field   name="string_7"           default="" required="false"  repeated="false" />
       <Field   name="string_8"           default="" required="false"  repeated="false" />
       <Field   name="string_9"           default="" required="false"  repeated="false" />
-    </MessageDef>  
+    </MessageDef>
 
     <MessageDef id="2" name="BoolSequence" deprecated="false" comment="">
       <Field   name="boolean_0"          default="0" required="false"  repeated="true" />
@@ -183,13 +183,13 @@
       <Field   name="EForeignSystem"   default="0" required="true"  repeated="false" />
       <Message name="UIdT_Id"          default="0" required="true"  repeated="false" />
       <Message name="UIdT_subId"       default="0" required="true"  repeated="false" />
-    </MessageDef>  
+    </MessageDef>
 
     <MessageDef id="132" name="synapse::common::Statistic"   deprecated="false" comment="common_def.idl" >
       <Field   name="name"             default="0" required="true"  repeated="false" />
       <!--Message name="UValue"           default="0" required="true"  repeated="false" /-->
     </MessageDef>
-    
+
     <MessageDef id="129" name="StRdvClientOrderStatistics"  deprecated="false" comment="message_def.idl" >
       <Message   name="synapse::misc::StFid"         default="0" required="true"  repeated="false" />
       <Message   name="synapse::common::Statistic"   default="0" required="false" repeated="true"  />
@@ -210,7 +210,7 @@
       <Message name="StRdvMarketOrderStatistics" default="0" required="false" repeated="false" />
       <Message name="StRdvExecutionStatistics"   default="0" required="false" repeated="false" />
     </MessageDef>
-    
+
     <MessageDef id="124" name="StRoot" deprecated="false" comment="message_def.idl">
       <Field   name="EMessageType"         default="0" required="true"  repeated="false" />
       <Field   name="eventId"              default="0" required="true"  repeated="false" />
@@ -280,8 +280,8 @@
   <FieldDef id="117" name="name6"                                   type="STRING"  deprecated="false" comment="synapse::common::SeqFields" />
   <FieldDef id="118" name="synapse::common::StDateTime"             type="DOUBLE"  deprecated="false" comment="StOrderDefInternalSection" />
   <FieldDef id="119" name="quantity"                                type="LONG"    deprecated="false" comment="" />
-  
-  
+
+
 </FieldsDef>
 
 <MessagesDef>
@@ -302,7 +302,7 @@
     <Field     name="name5"         default="0" required="true"  repeated="false" />
     <Field     name="name6"         default="0" required="true"  repeated="false" />
   </MessageDef>
-  
+
   <MessageDef id="141" name="StProductCode" deprecated="false" comment="business_common_def.idl">
     <Field     name="EProductCodeType"             default="0" required="true"  repeated="false" />
     <Field     name="sValue"                       default="0" required="true"  repeated="false" />
@@ -334,7 +334,7 @@
     <Field   name="sValue"                         default="0" required="true"  repeated="false" />
     <Field   name="EBookingCodeType"               default="0" required="true"  repeated="false" />
   </MessageDef>
-  
+
   <MessageDef id="136" name="synapse::obs::client::StClientId" deprecated="false" comment="obs_client_order_def.idl">
     <Field   name="crds"                           default="0" required="true"  repeated="false" />
     <Field   name="mnemo"                          default="0" required="true"  repeated="false" />
@@ -378,7 +378,7 @@
     <Message name="synapse::common::SeqFields"                       default="0" required="true"  repeated="false" />
   </MessageDef>
 
-   
+
     <MessageDef id="150" name="StClientOrderInternalSectionMsg" deprecated="false" comment="message_cash_def.idl">
       <Message   name="StRoot"                                                default="0" required="true"  repeated="false" />
       <Message   name="synapse::misc::StFid"                                  default="0" required="true"  repeated="false" />
@@ -413,9 +413,9 @@
       <Message name="StClientOrderInternalSectionMsg"          default="0" required="false"  repeated="false" />
       <Message name="StClientOrderCustomerSectionMsg"          default="0" required="false"  repeated="false" />
     </MessageDef>
-    
 
-    
+
+
   </MessagesDef>
 
 </Dico>

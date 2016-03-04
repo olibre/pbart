@@ -13,7 +13,7 @@
   </FieldsDef>
 
   <MessagesDef>
-  
+
     <MessageDef id="10" name="ClientcashStOrder" deprecated="false" comment="basic order">
       <Field name="Prc"  required="false" repeated="false" default="5.5" />
       <Field name="Qty"  required="true"  repeated="false" default="555" />
@@ -21,7 +21,7 @@
 	
     <MessageDef id="11" name="MessageVide" deprecated="false" comment="for test">
       <!-- no field -->
-    </MessageDef>  
+    </MessageDef>
 	
     <MessageDef id="12" name="MarketStOrder" deprecated="false" comment="sub-Msg">
       <Field   name="isSent"              required="true"  repeated="false" default="true" />
@@ -35,5 +35,5 @@
     </MessageDef>
 	
   </MessagesDef>
-  
+
 </Dico>

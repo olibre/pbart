@@ -18,5 +18,5 @@
       <Field name="Pos"  default="0" required="false" repeated="false" />
     </MessageDef>
   </MessagesDef>
-  
+
 </Dico>

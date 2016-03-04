@@ -22,5 +22,5 @@
       <Field name="2"  default="0" required="false" repeated="false" />
     </MessageDef>
   </MessagesDef>
-  
+
 </Dico>
