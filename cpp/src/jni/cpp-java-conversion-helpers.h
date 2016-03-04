@@ -32,4 +32,3 @@ void rethrow_cpp_exception_as_java_exception (JNIEnv *env);
 
 
 #endif // JNI_CPP_JAVA_CONVERTION_HELPERS_H_
-

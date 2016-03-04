@@ -62,13 +62,12 @@ public:
     // Constructors
 public:
     VariantT ()                     :           type_(Type::EMPTY)         {}
-    VariantT (Type::Integer t     ) :           type_(t)                   {}
+    VariantT (Type::Enum t        ) :           type_(t)                   {}
     VariantT (Type t              ) :           type_(t)                   {}
     VariantT (Type t, double     v) : u_   (v), type_(t)                   {}
     VariantT (        bool       v) : u_   (v), type_(Type::BOOL)          {}
     VariantT (        int        v) : u_   (v), type_(Type::LONG)          {}
-    VariantT (        long       v) : u_   (v), type_(Type::LONG)          {}
-    VariantT (        long long  v) : u_   (v), type_(Type::LONG)          {}
+    VariantT (        long_t     v) : u_   (v), type_(Type::LONG)          {}
     VariantT (        double     v) : u_   (v), type_(Type::DOUBLE)        {}
     VariantT (const std::string& v) : strg_(v), type_(Type::STRING)        {}
     VariantT (const char       * v) : strg_(v), type_(Type::STRING)        {}
@@ -87,8 +86,7 @@ protected:
         variantType() {}
         explicit variantType (bool      v) : bool_(v) {}
         explicit variantType (int       v) : long_(v) {}
-        explicit variantType (long      v) : long_(v) {}
-        explicit variantType (long long v) : long_(v) {}
+        explicit variantType (long_t    v) : long_(v) {}
         explicit variantType (double    v) : dble_(v) {}
 
         bool       bool_;
@@ -216,8 +214,10 @@ private:
     SeqDouble   const&  get (helper<SeqDouble   const&>) const { return toSeqDouble (); }
     SeqString   const&  get (helper<SeqString   const&>) const { return toSeqString (); }
     SeqMessage  const&  get (helper<SeqMessage  const&>) const { return toSeqMessage(); }
+
 public:
-    template<class T> T get() const { return get(helper<T>()); }
+    template<class T>
+    static T get() { return get(helper<T>()); }
 
     //--------------------------------------------------------------------------
     void reset ()       {        type_.reset();                }
@@ -276,6 +276,7 @@ public:
         type_ = other.type_;
         switch (type_)
         {
+        case Type::EMPTY:                              break;
         case Type::BOOL:
         case Type::LONG:
         case Type::DOUBLE:      u_    = other.u_;      break;
@@ -286,23 +287,36 @@ public:
         case Type::SEQ_DOUBLE:  seqD_ = other.seqD_;   break;
         case Type::SEQ_STRING:  seqS_ = other.seqS_;   break;
         case Type::SEQ_MESSAGE: seqM_ = other.seqM_;   break;
-
         default:
             assert(0&&"Unexpected variant type");
-        case Type::EMPTY:
-            break;
         }
-        return *this; // to support chained assignment operators (a=b=c), always return *this
+        return *this; // to support chained assignment operators: a=b=c;
     }
 
-    /*
     // ----------------------------------------------------------------------------
     // Copy constructor
     VariantT (const VariantT& other)
     {
-      *this = other;
+        type_ = other.type_;
+        switch (type_)
+        {
+        default:
+            assert(0&&"Unexpected variant type");
+            BOOST_FALLTHROUGH; // for optimization continue with next case
+
+        case Type::EMPTY:                              break;
+        case Type::BOOL:
+        case Type::LONG:
+        case Type::DOUBLE:      u_    = other.u_;      break;
+        case Type::STRING:      strg_ = other.strg_;   break;
+        case Type::MESSAGE:     msge_ = other.msge_;   break;
+        case Type::SEQ_BOOL:    seqB_ = other.seqB_;   break;
+        case Type::SEQ_LONG:    seqL_ = other.seqL_;   break;
+        case Type::SEQ_DOUBLE:  seqD_ = other.seqD_;   break;
+        case Type::SEQ_STRING:  seqS_ = other.seqS_;   break;
+        case Type::SEQ_MESSAGE: seqM_ = other.seqM_;   break;
+        }
     }
-    */
 
     // -----------------------------------------------------------------------
     bool operator == (const VariantT& other) const
@@ -312,22 +326,22 @@ public:
 
         switch (type_)
         {
-        case Type::BOOL:           return other.u_.bool_ == u_.bool_;
-        case Type::LONG:           return other.u_.long_ == u_.long_;
-        case Type::DOUBLE:         return other.u_.dble_ == u_.dble_;
-        case Type::STRING:         return other.   strg_ ==    strg_;
-        case Type::MESSAGE:        return other.   msge_ ==    msge_;
-        case Type::SEQ_BOOL:       return other.   seqB_ ==    seqB_;
-        case Type::SEQ_LONG:       return other.   seqL_ ==    seqL_;
-        case Type::SEQ_DOUBLE:     return other.   seqD_ ==    seqD_;
-        case Type::SEQ_STRING:     return other.   seqS_ ==    seqS_;
-        case Type::SEQ_MESSAGE:    return other.   seqM_ ==    seqM_;
-
+        case Type::EMPTY:       return true;
+        case Type::BOOL:        return other.u_.bool_ == u_.bool_;
+        case Type::LONG:        return other.u_.long_ == u_.long_;
+        case Type::DOUBLE:      return other.u_.dble_ == u_.dble_; // safe
+        case Type::STRING:      return other.   strg_ ==    strg_;
+        case Type::MESSAGE:     return other.   msge_ ==    msge_;
+        case Type::SEQ_BOOL:    return other.   seqB_ ==    seqB_;
+        case Type::SEQ_LONG:    return other.   seqL_ ==    seqL_;
+        case Type::SEQ_DOUBLE:  return other.   seqD_ ==    seqD_;
+        case Type::SEQ_STRING:  return other.   seqS_ ==    seqS_;
+        case Type::SEQ_MESSAGE: return other.   seqM_ ==    seqM_;
         default:
             assert(0&&"Unexpected variant type");
-        case Type::EMPTY:
-            return true;
         }
+
+        return false;
     }
 
     // -----------------------------------------------------------------------
@@ -387,6 +401,13 @@ T& print (T& os, const VariantT<MSG>& variant, int n = 0, bool dash = false)
 {
     switch (variant.type())
     {
+    case Type::EMPTY:
+        assert(0&&"Unexpected variant.type()=Type::BOOL");
+        BOOST_FALLTHROUGH; // for optimization continue with next case
+    default:
+        assert(0&&"Unexpected variant.type() value");
+        BOOST_FALLTHROUGH; // for optimization continue with next case
+
     case pbart::Type::BOOL:    spaces(os,n); os <<     (variant.toBool() ? "true" : "false"); break;
     case pbart::Type::LONG:    spaces(os,n); os <<      variant.toLong();                     break;
     case pbart::Type::DOUBLE:  spaces(os,n); os <<      variant.toDouble();                   break;
@@ -410,9 +431,6 @@ T& print (T& os, const VariantT<MSG>& variant, int n = 0, bool dash = false)
         }
         break;
     }
-
-    default:
-        assert(0 && "Unexpected variant type");
     }
     return os;
 }

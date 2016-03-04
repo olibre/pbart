@@ -17,7 +17,7 @@ package org.Lmap.pbart;
  * @author olibre (olibre@Lmap.org)
  *
  */
-public class IdException extends DmlRuntimeException {
+public class IdException extends RuntimeException {
 
     public IdException(String text) {
         super(text);

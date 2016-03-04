@@ -14,22 +14,22 @@
 
 //#define DUMP_BUFFER_IN_FILES
 //#define DUMP_MESSAGES_IN_YAML
-//#define CHECK_ALL_POSSIBILITIES
+#define CHECK_ALL_POSSIBILITIES
 
+
+#include <pbart/Serializer.h>
+#include <pbart/Message.h>
+#include <pbart/Dico.h>
+
+#include <cppunit/extensions/HelperMacros.h>
 
 #ifdef _MSC_VER
-//#include "WinNT.h"    //LARGE_INTEGER
-//#include "WinBase.h"  //QueryPerformanceCounter
+//#include <WinNT.h>    //LARGE_INTEGER
+//#include <WinBase.h>  //QueryPerformanceCounter
 #  include <windows.h>
 #else
 #  include <time.h>
 #endif
-
-#include "pbart/Serializer.h"
-#include "pbart/Message.h"
-#include "pbart/Dico.h"
-
-#include <cppunit/extensions/HelperMacros.h>
 
 #ifdef  DUMP_BUFFER_IN_FILES
 #  include <fstream>
@@ -571,7 +571,7 @@ public:
     pbart::Buffer  b3 = serializer.encode (m4);
     pbart::Message m5 = serializer.decode (b3);
     CPPUNIT_ASSERT_EQUAL( m5.id(), m1.id() );
-    CPPUNIT_ASSERT_EQUAL( m5.size(), 0 );
+    CPPUNIT_ASSERT_EQUAL( m5.size(), 0ul );
     // TODO check m4 == m3
   }
 

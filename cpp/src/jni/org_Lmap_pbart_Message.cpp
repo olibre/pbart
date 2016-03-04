@@ -396,7 +396,15 @@ JNIEXPORT jint JNICALL Java_org_Lmap_pbart_Message_native_1getSeqSize
         case pbart::Type::SEQ_DOUBLE:  return message->get(id).toSeqDouble ().size();
         case pbart::Type::SEQ_STRING:  return message->get(id).toSeqString ().size();
         case pbart::Type::SEQ_MESSAGE: return message->get(id).toSeqMessage().size();
-        default:                     return 0;
+
+        case pbart::Type::EMPTY:
+        case pbart::Type::BOOL:
+        case pbart::Type::LONG:
+        case pbart::Type::DOUBLE:
+        case pbart::Type::STRING:
+        case pbart::Type::MESSAGE:
+        default:
+            return 0;
         }
     }
     catch(...)

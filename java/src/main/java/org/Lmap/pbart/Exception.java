@@ -17,17 +17,17 @@ package org.Lmap.pbart;
  * @author olibre (olibre@Lmap.org)
  *
  */
-public class DmlRuntimeException extends java.lang.RuntimeException {
+public class Exception extends java.lang.Exception {
 
-    public DmlRuntimeException(String text) {
+    public Exception(String text) {
         super(text);
     }
 
-    public DmlRuntimeException(Throwable exception) {
+    public Exception(Throwable exception) {
         super(exception);
     }
 
-    public DmlRuntimeException(String text, Throwable exception) {
+    public Exception(String text, Throwable exception) {
         super(text, exception);
     }
 }

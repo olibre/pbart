@@ -1,0 +1,8 @@
+#!/bin/bash
+
+CC="@ccache@ @CMAKE_C_COMPILER@"
+CXX="@ccache@ @CMAKE_CXX_COMPILER@"
+CFLAGS="@FlagsC@"
+CXXFLAGS="@FlagsCxx@"
+
+eval "$@"

@@ -17,7 +17,7 @@ package org.Lmap.pbart;
  * @author olibre (olibre@Lmap.org)
  *
  */
-public class TypeException extends DmlRuntimeException {
+public class TypeException extends RuntimeException {
 
     public TypeException(String text) {
         super(text);

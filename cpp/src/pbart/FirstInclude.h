@@ -12,8 +12,12 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PBART_EXPORT_H_
-#define PBART_EXPORT_H_
+#ifdef PBART_FIRST_INCLUDE_H_
+#error "This file must only be used by C++ pbart files, must be the first included file and must be included only once"
+#endif
+
+#ifndef PBART_FIRST_INCLUDE_H_
+#define PBART_FIRST_INCLUDE_H_
 
 #ifdef PBART_EXPORTS
 #  warning PBART_EXPORTS already defined: '#PBART_EXPORTS'
@@ -23,14 +27,6 @@
 #  warning PBART_EXPORT already defined: '#PBART_EXPORT'
 #endif
 
-#if defined(WIN32) || defined(WIN64)
-#  ifdef COMPILING_PBART
-#    define PBART_EXPORTS __declspec(dllexport)
-#  else
-#    define PBART_EXPORTS __declspec(dllimport)
-#  endif
-#else
-#  define PBART_EXPORTS
-#endif
+#define COMPILING_PBART 1
 
-#endif  // PBART_EXPORT_H_
+#endif  // PBART_FIRST_INCLUDE_H_

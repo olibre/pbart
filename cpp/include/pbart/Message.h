@@ -15,17 +15,18 @@
 #ifndef PBART_MESSAGE_H_
 #define PBART_MESSAGE_H_
 
-#include <map>
-#include <string>
 
 #include "pbart/Dico.h"
 #include "pbart/Iterator.h"
+
+#include <map>
+#include <string>
 
 
 namespace pbart
 {
 // ------------------------------------------------------------------------
-class PBART_EXPORT Message
+class PBART_EXPORTS Message
 {
     // ---------------------------------------------------------
     // Variant
@@ -41,9 +42,9 @@ public:
 public:
     Message ();
     Message (const Message&);
+    explicit Message (const SharedDico&);
+    explicit Message (const SharedDico&, Id);
     Message& operator=(const Message&);
-    explicit Message (const SharedDico& d);
-    Message (const SharedDico& d, Id id);
 
     // Iterator
 public:
@@ -81,7 +82,7 @@ public:
     void                   id (Id);
     void                 trim ();
     void                clear ();
-    int                  size ()   const;
+    size_t               size ()   const;
     bool                empty ()   const;
     ItemsById  const&   items ()   const;
     SharedDico const&    dico ()   const;
@@ -92,11 +93,11 @@ public:
 
     // Data ---------------------------------
 private:
-    Id            id_;
-    SharedDico    dic_;
-    const Field*  def_;
-    ValuesById    values_;
-    mutable int   bytes_;   // size of the serialized message
+    SharedDico       dic_;
+    const Field*     def_;
+    ValuesById       values_;
+    mutable int      bytes_;   // size of the serialized message
+    Id               id_;
 
     // ------ Static const Data -----------
     static const Field  fallback_;
@@ -123,11 +124,11 @@ typedef  Message::SharedDico   SharedDico;
 namespace pbart
 {
 //--------------------------------------------------------------------------
-inline Message::Message ()                           : id_(0),      dic_(0),      def_(&fallback_),                     values_(),          bytes_(0)        { assert(def_->items().empty()); }
-inline Message::Message (const Message& o)           : id_(o.id_),  dic_(o.dic_), def_(o.def_),                         values_(o.values_), bytes_(o.bytes_) {                                }
-inline Message& Message::operator=(const Message& o) { id_=o.id_;   dic_=o.dic_;  def_=o.def_;                          values_=o.values_;  bytes_=o.bytes_;   return *this;                  }
-inline Message::Message (const SharedDico& d)        : id_(0),      dic_(d),      def_(&fallback_),                     values_(),          bytes_(0)        { assert(def_->items().empty()); }
-inline Message::Message (const SharedDico& d, Id id) : id_(id),     dic_(d),      def_(d ? &d->field(id) : &fallback_), values_(),          bytes_(0)
+inline Message& Message::operator=(const Message& o) { dic_=o.dic_;  def_=o.def_;                          values_=o.values_;  bytes_=o.bytes_;  id_=o.id_;   return *this;                  }
+inline Message::Message (const Message& o)           : dic_(o.dic_), def_(o.def_),                         values_(o.values_), bytes_(o.bytes_), id_(o.id_) {                                }
+inline Message::Message ()                           : dic_(0),      def_(&fallback_),                     values_(),          bytes_(0),        id_(0)     { assert(def_->items().empty()); }
+inline Message::Message (const SharedDico& d)        : dic_(d),      def_(&fallback_),                     values_(),          bytes_(0),        id_(0)     { assert(def_->items().empty()); }
+inline Message::Message (const SharedDico& d, Id id) : dic_(d),      def_(d ? &d->field(id) : &fallback_), values_(),          bytes_(0),        id_(id)
 {
 #if !defined(COMPILING_CPPUNIT_CODEC) && !defined(COMPILING_CPPUNIT_MESSAGE) && !defined (_MSC_VER) //bug in MS Visual C++ In this case; it ignores COMPILING_CPPUNIT_MESSAGE has been defined before including headers.
     assert(def_->type() == Type::MESSAGE);
@@ -140,7 +141,7 @@ inline Message::const_iterator Message::cbegin    ()      const { return begin()
 inline Message::const_iterator Message::cend      ()      const { return end();                               }
 inline Message::const_iterator Message::end       ()      const { return const_iterator (items().end());      }
 inline Message::iterator       Message::end       ()            { return       iterator (items().end());      }
-inline int                     Message::size      ()      const { return values_.size();                      }
+inline size_t                  Message::size      ()      const { return values_.size();                      }
 inline bool                    Message::empty     ()      const { return values_.empty();                     }
 inline Id                      Message::id        ()      const { return id_;                                 }
 inline const ItemsById&        Message::items     ()      const { return def_->items();                       }

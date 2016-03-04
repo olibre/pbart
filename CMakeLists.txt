@@ -13,6 +13,7 @@
 cmake_minimum_required(VERSION 3.4)
 # requires v3.1 because use target_compile_features()
 # requires v3.4 because use FindJava.cmake/UseJava/create_javah()
+# requires v3.4 because use CMAKE_<LANG>_COMPILER_LAUNCHER
 
 project(pbart)
 
@@ -46,6 +47,9 @@ option (LTO "Link Time Optimization" OFF)
 #        cmake -DPGO=use
 set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or use)" )
 
+# For future use TODO (olibre)
+#set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake")
+
 
 ######################
 ## CMAKE_BUILD_TYPE ##
@@ -57,9 +61,9 @@ set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or
 
 # Default = Release
 if( NOT CMAKE_BUILD_TYPE )
-    message(STATUS "** Setting build type to 'Release' as none was specified.")
+    message(STATUS "** No build type => Default is 'Release'")
     set( CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE )
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "Coverage") # For 'cmake -i' and 'cmake-gui'
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Release" "Debug" "Coverage") # For 'cmake -i' and 'cmake-gui'
 endif()
 
 # Coverage: check tools gcov/lcov/... and set flag --coverage
@@ -67,8 +71,8 @@ endif()
 if( CMAKE_BUILD_TYPE STREQUAL "Coverage" )
     add_definitions( -DNDEBUG )  # Disable assert to avoid code coverage bias
     if( CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" )
-        set (CoverageCmplFlag --coverage) #add_compile_options( --coverage )
-        set (CoverageLinkFlag --coverage) #link_libraries(      --coverage )
+        set (CoverageCmplFlags --coverage) #add_compile_options( --coverage )
+        set (CoverageLinkFlags --coverage) #link_libraries(      --coverage )
         find_program (gcov gcov)
         if (NOT gcov)
             message(WARNING "** Cannot find gcov => Build may fail...")
@@ -161,15 +165,24 @@ endif()
 add_compile_options( -g3 -ggdb3 )  # -g3 -> include also the MACRO definitions
 
 # Enable many wanings
-if( CMAKE_COMPILER_IS_GNUCXX )
-    set( ManyWarns -Wall -Wextra -Wswitch-enum -Wno-ignored-qualifiers -pedantic -pedantic-errors -Wconversion -Wno-unused-but-set-variable -Wno-unused-variable -Wno-unused-function -Wno-conversion) #-Weffc++ -Wpadded)
-elseif( CMAKE_CXX_COMPILER_ID STREQUAL "Clang" )
-    set( ManyWarns -Weverything)
+if (CMAKE_COMPILER_IS_GNUCXX)
+    set (WarningFlags -Wall -Wextra -Wswitch-enum -Wno-ignored-qualifiers -pedantic -pedantic-errors -Wconversion -Wno-unused-but-set-variable -Wno-unused-variable -Wno-unused-function -Wno-conversion) #-Weffc++ -Wpadded)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    set (WarningFlags -Weverything -Wno-c++98-compat)
+    #et (WarningFlags -Wimplicit-fallthrough)
 endif()
 
-# Speed up build using pipes (rather than temporary files) for communication between the various GCC stages
+# Speed: Use pipes rather than temporary files between the compiler stages
 add_compile_options( -pipe )
 link_libraries(      -pipe )
+
+# Retrieve above compile definitions and options
+get_directory_property (CompileDefinitions COMPILE_DEFINITIONS)
+get_directory_property (CompileOptions     COMPILE_OPTIONS)
+string (REPLACE ";" " " CompileFlags "${CompileDefinitions} ${CompileOptions}")
+set (FlagsC   ${CMAKE_C_FLAGS_${CMAKE_BUILD_TYPE}}   ${CompileFlags})
+set (FlagsCxx ${CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}} ${CompileFlags})
+
 
 
 ###########
@@ -180,15 +193,23 @@ link_libraries(      -pipe )
 find_program (ccache ccache)
 if (ccache)
     message(STATUS "** Command 'ccache' detected => Will use 'ccache' to speed up compilation and link" )
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK    ccache)
-    # TODO(olibre): Use "CMAKE_{C,CXX}_COMPILER_LAUNCHER=ccmake" with cmake-v3.4
+    #et_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache) # Before cmake-3.4
+    set (CMAKE_C_COMPILER_LAUNCHER   ccache)
+    set (CMAKE_CXX_COMPILER_LAUNCHER ccache)
+    set (wrapper_name ccache)
+else()
+    set (wrapper_name default)
 endif()
+set (wrapper_sh_in ${CMAKE_SOURCE_DIR}/CMake/wrapper_${wrapper_name}.sh.in)
+set (wrapper_sh    ${CMAKE_BINARY_DIR}/CMake/wrapper_${wrapper_name}.sh)
+configure_file(${wrapper_sh_in} ${wrapper_sh} @ONLY)
 
 # Use tool "include-what-you-use" if available
 find_program (iwyu NAMES iwyu include-what-you-use)
 if (iwyu)
-    set(CXX_INCLUDE_WHAT_YOU_USE ${iwyu})
+    set (CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${iwyu})
+    set (CMAKE_C_INCLUDE_WHAT_YOU_USE   ${iwyu})
 endif()
 
 
@@ -197,19 +218,20 @@ endif()
 ##########################
 
 find_package(Protobuf REQUIRED) # sudo apt install libprotobuf-dev
-add_library(               pbart_Protobuf INTERFACE)
-target_include_directories(pbart_Protobuf INTERFACE ${PROTOBUF_INCLUDE_DIRS})
-target_link_libraries(     pbart_Protobuf INTERFACE ${PROTOBUF_LIBRARIES})
+add_library(               pbart_Protobuf        INTERFACE)
+target_include_directories(pbart_Protobuf SYSTEM INTERFACE ${PROTOBUF_INCLUDE_DIRS})
+target_link_libraries(     pbart_Protobuf        INTERFACE ${PROTOBUF_LIBRARIES})
 
 find_package(Boost REQUIRED) # sudo apt install libboost-dev
-add_library(               pbart_Boost INTERFACE)
-target_include_directories(pbart_Boost INTERFACE ${Boost_INCLUDE_DIRS})
-target_link_libraries(     pbart_Boost INTERFACE ${Boost_LIBRARIES})
+add_library(               pbart_Boost        INTERFACE)
+target_include_directories(pbart_Boost SYSTEM INTERFACE ${Boost_INCLUDE_DIRS})
+target_link_libraries(     pbart_Boost        INTERFACE ${Boost_LIBRARIES})
+# TODO(olibre): Replace pbart_Boost by Boost::boost whith cmake-3.5
 
 add_subdirectory(ext/tinyxml2)
-add_library(               pbart_TinyXML INTERFACE)
-target_include_directories(pbart_TinyXML INTERFACE ext/tinyxml2)
-target_link_libraries(     pbart_TinyXML INTERFACE tinyxml2)
+add_library(               pbart_TinyXML        INTERFACE)
+target_include_directories(pbart_TinyXML SYSTEM INTERFACE ext/tinyxml2)
+target_link_libraries(     pbart_TinyXML        INTERFACE tinyxml2)
 
 if( CMAKE_GENERATOR STREQUAL "Unix Makefiles")
     set(make "$(MAKE)") # Allow passing arguments from parent make command
@@ -217,40 +239,48 @@ else()
     set(make make)      # Use 'make' because $(MAKE) fails using ninja
 endif()
 
+
 include(ExternalProject)
 ExternalProject_Add(   cppunit
-#   DEPENDS            Threads::Threads ZLIB::ZLIB
-    SOURCE_DIR         ${CMAKE_CURRENT_LIST_DIR}/ext/cppunit
-    BUILD_IN_SOURCE    1
-    UPDATE_COMMAND     autoconf || autoreconf --install
-    CONFIGURE_COMMAND  ${CMAKE_CURRENT_LIST_DIR}/ext/cppunit/configure
-                       --prefix=${CMAKE_BINARY_DIR}
-                       CC=${CMAKE_C_COMPILER}
-                       CXX=${CMAKE_CXX_COMPILER}
+#   EXCLUDE_FROM_ALL
+    PREFIX             ${CMAKE_BINARY_DIR}/cppunit
+    SOURCE_DIR         ${CMAKE_SOURCE_DIR}/ext/cppunit
+    UPDATE_COMMAND     autoconf || autoreconf --install #; make distclean
+    CONFIGURE_COMMAND  ${wrapper_sh} ${CMAKE_SOURCE_DIR}/ext/cppunit/configure
+                       --disable-dependency-tracking
+                       --enable-silent-rules
+                       --enable-static=no
+                       --prefix=${CMAKE_BINARY_DIR}/cppunit
     BUILD_COMMAND      ${make}
     INSTALL_COMMAND    ${make} install
-    BUILD_BYPRODUCTS   ${CMAKE_BINARY_DIR}/lib/libcppunit.so  # Required for ninja
-)
+    BUILD_BYPRODUCTS   ${CMAKE_BINARY_DIR}/cppunit/lib/libcppunit.so # for ninja
+                       ${CMAKE_BINARY_DIR}/cppunit/include
+                       ${CMAKE_BINARY_DIR}/cppunit/include/cppunit/config-auto.h
+    BUILD_IN_SOURCE    0 # TODO(olibre): Set zero and fix INTERFACE_INCLUDE_DIRECTORIES
+)                        # TODO(olibre): and remove make_directory(), use? $<BUILD_INTERFACE:...>
+make_directory( ${CMAKE_BINARY_DIR}/cppunit/include )
 
-add_library(           pbart_CppUnit SHARED IMPORTED)
-add_dependencies(      pbart_CppUnit cppunit)
-set_target_properties( pbart_CppUnit PROPERTIES
-                       IMPORTED_LOCATION             ${CMAKE_BINARY_DIR}/lib/libcppunit.so
-                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/ext/cppunit/include)
+add_library(           pbart_cppunit SHARED IMPORTED)
+add_dependencies(      pbart_cppunit cppunit)
+set_target_properties( pbart_cppunit PROPERTIES
+                       IMPORTED_LOCATION             ${CMAKE_BINARY_DIR}/cppunit/lib/libcppunit.so
+                       INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_BINARY_DIR}/cppunit/include )
 
 
 ######################
 ## C++ CORE LIBRARY ##
 ######################
 
-file(GLOB pbart_header_files cpp/include/pbart/*.h)
-file(GLOB pbart_source_files cpp/src/pbart/*.cpp)
-add_library(               pbart ${pbart_header_files} ${pbart_source_files})
-target_include_directories(pbart PUBLIC cpp/include)
-target_link_libraries(     pbart PUBLIC pbart_Protobuf pbart_Boost PRIVATE pbart_TinyXML)
-target_compile_features(   pbart PUBLIC cxx_long_long_type)
-target_compile_options(    pbart PUBLIC ${CoverageCmplFlag} PRIVATE ${ManyWarns})
-target_link_libraries(     pbart PUBLIC ${CoverageLinkFlag} PRIVATE ${ManyWarns})
+file (GLOB pbart_private_files cpp/src/pbart/*.cpp
+                               cpp/src/pbart/*.h    )
+file (GLOB pbart_public_files  cpp/include/pbart/*.h)
+add_library(               pbart ${pbart_private_files} ${pbart_public_files})
+target_link_libraries(     pbart PUBLIC  pbart_Protobuf pbart_Boost PRIVATE pbart_TinyXML)
+target_include_directories(pbart PUBLIC  cpp/include)
+#arget_compile_definitions(pbart PRIVATE COMPILING_PBART=CMake)  # For MSWin export dll
+target_compile_features(   pbart PUBLIC  cxx_long_long_type)
+target_compile_options(    pbart PUBLIC  ${CoverageCmplFlags} PRIVATE ${WarningFlags})
+target_link_libraries(     pbart PUBLIC  ${CoverageLinkFlags} PRIVATE ${WarningFlags})
 
 
 ######################
@@ -259,8 +289,8 @@ target_link_libraries(     pbart PUBLIC ${CoverageLinkFlag} PRIVATE ${ManyWarns}
 
 enable_testing()
 
-add_library(TestMain cpp/unit-test/pbart/Main.cpp)
-target_link_libraries(TestMain pbart pbart_CppUnit)
+add_library(          TestMain cpp/unit-test/pbart/Main.cpp)
+target_link_libraries(TestMain pbart pbart_cppunit)
 
 protobuf_generate_cpp(DicoBigSrc DicoBigHdr cpp/unit-test/data/dico-Big.proto)
 add_executable(            TestBig cpp/unit-test/pbart/TestBig.cpp ${DicoBigSrc} ${DicoBigHdr})
@@ -305,32 +335,38 @@ find_package(Java COMPONENTS Development)
 include (UseJava)
 find_package(JNI)
 create_javah(
-  TARGET          pbart-jni-serializer-header
-  GENERATED_FILES PbartJniSerializerHeader
-  CLASSES         org.Lmap.pbart.Serializer
-  CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
+    TARGET          pbart-jni-serializer-header
+    GENERATED_FILES PbartJniSerializerHeader
+    CLASSES         org.Lmap.pbart.Serializer
+    CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
 )
 create_javah(
-  TARGET          pbart-jni-message-header
-  GENERATED_FILES PbartJniMessageHeader
-  CLASSES         org.Lmap.pbart.Message
-  CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
+    TARGET          pbart-jni-message-header
+    GENERATED_FILES PbartJniMessageHeader
+    CLASSES         org.Lmap.pbart.Message
+    CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
 )
 
-add_library(               pbart-jni cpp/src/jni/org_Lmap_pbart_Message.cpp
-                                     cpp/src/jni/org_Lmap_pbart_Serializer.cpp
-                                     cpp/src/jni/cpp-java-conversion-helpers.cpp
-                                     cpp/src/jni/cpp-java-conversion-helpers.h
-                                     ${PbartJniSerializerHeader}
-                                     ${PbartJniMessageHeader}
+add_library( pbart-jni cpp/src/jni/org_Lmap_pbart_Message.cpp
+                       cpp/src/jni/org_Lmap_pbart_Serializer.cpp
+                       cpp/src/jni/cpp-java-conversion-helpers.cpp
+                       cpp/src/jni/cpp-java-conversion-helpers.h
+                       ${PbartJniSerializerHeader}
+                       ${PbartJniMessageHeader}
 )
 add_dependencies(          pbart-jni pbart-jni-serializer-header pbart-jni-message-header)
 target_include_directories(pbart-jni PUBLIC ${JNI_INCLUDE_DIRS})
-target_compile_options(    pbart-jni PRIVATE ${ManyWarns} ${CoverageCmplFlag})
-target_link_libraries(     pbart-jni PRIVATE ${ManyWarns} ${CoverageLinkFlag}
+target_compile_options(    pbart-jni PRIVATE ${WarningFlags} ${CoverageCmplFlags})
+target_link_libraries(     pbart-jni PRIVATE ${WarningFlags} ${CoverageLinkFlags}
                                      PUBLIC  pbart)
-target_compile_definitions(pbart-jni PRIVATE GENERATED_JNI_SERIALIZER_HEADER="${PbartJniSerializerHeader}"
-                                             GENERATED_JNI_MESSAGE_HEADER="${PbartJniMessageHeader}")
+target_compile_definitions(pbart-jni PUBLIC
+    GENERATED_JNI_SERIALIZER_HEADER="${PbartJniSerializerHeader}"
+    GENERATED_JNI_MESSAGE_HEADER="${PbartJniMessageHeader}"
+)
+
+add_executable(       TestJNI cpp/unit-test/jni/TestJNI.cpp)
+target_link_libraries(TestJNI pbart-jni TestMain)
+add_test(             TestJNI TestJNI ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
 
 
 ######################

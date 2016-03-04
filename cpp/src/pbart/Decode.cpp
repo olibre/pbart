@@ -12,25 +12,22 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <utility> //pair<>
+#include "FirstInclude.h"
+#include "pbart/Codec.h"
+#include "pbart/Serializer.h"
+#include "macros.h"
 
 #ifdef _MSC_VER
 #  pragma warning(push)
 #  pragma warning(disable: 4996)
 #endif
-
-#include "google/protobuf/wire_format_lite_inl.h"
-
+#include <google/protobuf/wire_format_lite_inl.h>
 #ifdef _MSC_VER
 #  pragma warning(pop)
 #endif
 
-//#include "google/protobuf/io/zero_copy_stream_impl_lite.h" //StringOutputStream
-//#include "google/protobuf/stubs/common.h" // required for internal serialization
+#include <utility> //pair<>
 
-
-#  include "pbart/Codec.h"
-#  include "pbart/Serializer.h"
 
 namespace pbart
 {
@@ -79,14 +76,11 @@ inline std::string Codec::header (InputStream& input, gp::uint32 tag, Id id)
 //--------------------------------------------------------------------------
 template< gpi::WireFormatLite::WireType  wireType,
           gpi::WireFormatLite::FieldType fieldType,
-          typename valueType > inline
-//void readAny( Id id, Id item,
-//              valueType& value, //output
-//              gp::uint32 tag,
-//              Codec::InputStream& input )
-valueType readAny( Id id, Id item,
-                   gp::uint32 tag,
-                   Codec::InputStream& input )
+          typename                       valueType >
+inline valueType readAny( Id                  id,
+                          Id                  item,
+                          gp::uint32          tag,
+                          Codec::InputStream& input )
 {
     // extract the wire type from tag
     gpi::WireFormatLite::WireType wt =
@@ -139,40 +133,30 @@ void readString (Id id, Id item, std::string& value, gp::uint32 tag, Codec::Inpu
 static inline
 Variant::long_t readLong (Id id, Id item, gp::uint32 tag, Codec::InputStream& input)
 {
-    //  Variant::long_t value;
-    //
-    //  readAny< gpi::WireFormatLite::WIRETYPE_VARINT,
-    //           gpi::WireFormatLite::TYPE_INT64 >
-    //         (id, item, value, tag, input);
-    //
-    //  return value;
-
-    return readAny <gpi::WireFormatLite::WIRETYPE_VARINT, gpi::WireFormatLite::TYPE_INT64, Variant::long_t> (id, item, tag, input);
+    return readAny< gpi::WireFormatLite::WIRETYPE_VARINT
+            , gpi::WireFormatLite::TYPE_INT64
+            , Variant::long_t
+            > (id, item, tag, input);
 }
 //--------------------------------------------------------------------------
 static inline
 int readLength (Id id, Id item, gp::uint32 tag, Codec::InputStream& input)
 {
-    //  gp::int32 bytes;
-    //
-    //  readAny< gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
-    //           gpi::WireFormatLite::TYPE_INT32 >
-    //         (id, item, bytes, tag, input);
-    //
-    //  return bytes;
-
-    return readAny <gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, gpi::WireFormatLite::TYPE_INT32, gp::int32> (id, item, tag, input);
+    return readAny< gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED
+            , gpi::WireFormatLite::TYPE_INT32
+            , gp::int32
+            > (id, item, tag, input);
 }
 //--------------------------------------------------------------------------
-static inline
-gp::uint32 readVarint (Id id, Id item, Codec::InputStream& input)
-{
-    gp::uint32 varint;
-    bool ok = input.ReadVarint32 (&varint);
-    if (!ok)
-        throw DecodeException (id, item, "readVarint");
-    return varint;
-}
+// static inline
+// gp::uint32 readVarint (Id id, Id item, Codec::InputStream& input)
+// {
+//     gp::uint32 varint;
+//     bool ok = input.ReadVarint32 (&varint);
+//     if (!ok)
+//         throw DecodeException (id, item, "readVarint");
+//     return varint;
+// }
 //--------------------------------------------------------------------------
 // static inline
 // gp::uint32 read32bits (Id id, Id item, Codec::InputStream& input)
@@ -212,10 +196,10 @@ const char* position (google::protobuf::io::CodedInputStream& input)
 //--------------------------------------------------------------------------
 void Codec::decodeBool (Message& msg, Id item, gp::uint32 tag, InputStream& input)
 {
-    //  bool value = 0;
-    //  readAny< gpi::WireFormatLite::WIRETYPE_VARINT,
-    //           gpi::WireFormatLite::TYPE_BOOL      > (msg.id(), item, value, tag, input);
-    bool value = readAny <gpi::WireFormatLite::WIRETYPE_VARINT, gpi::WireFormatLite::TYPE_BOOL, bool> (msg.id(), item, tag, input);
+    bool value = readAny< gpi::WireFormatLite::WIRETYPE_VARINT
+            , gpi::WireFormatLite::TYPE_BOOL
+            , bool
+            > (msg.id(), item, tag, input);
 
     // map::insert() returns a 'pair'. When 'pair.second' is 'false' => key was already inserted => throw
     std::pair<ValuesById::iterator,bool> pair =
@@ -237,10 +221,10 @@ void Codec::decodeLong (Message& msg, Id item, gp::uint32 tag, InputStream& inpu
 //--------------------------------------------------------------------------
 void Codec::decodeDouble (Message& msg, Id item, gp::uint32 tag, InputStream& input, Type type)
 {
-    //  double value = 0;
-    //  readAny< gpi::WireFormatLite::WIRETYPE_FIXED64,
-    //           gpi::WireFormatLite::TYPE_DOUBLE     > (msg.id(), item, value, tag, input);
-    double value = readAny <gpi::WireFormatLite::WIRETYPE_FIXED64, gpi::WireFormatLite::TYPE_DOUBLE, double> (msg.id(), item, tag, input);
+    double value = readAny< gpi::WireFormatLite::WIRETYPE_FIXED64
+            , gpi::WireFormatLite::TYPE_DOUBLE
+            , double
+            > (msg.id(), item, tag, input);
 
     // map::insert() returns a 'pair'. When 'pair.second' is 'false' => key was already inserted => throw
     std::pair<ValuesById::iterator,bool> pair =
@@ -270,18 +254,18 @@ inline void Codec::decode (Message& msg, InputStream& input, int count)
 {
     assert(count > 0);
 
-    TRACE("decode (msg="<< msg.id() <<", input="<< &input <<", count="<< count <<")\n");
+    PBART_TRACE("decode (msg="<< msg.id() <<", input="<< &input <<", count="<< count <<")\n");
 
     // stop decode when count reaches zero
     // if count is not zero but tag is zero => there is a problem
     gp::uint32 tag;
-    while(  (count--)  &&  (tag = input.ReadTag())  )                 //NOLINT
+    while(  (count--)  &&  (tag = input.ReadTag())  )
     {
-        TRACE ("-loop\n");
+        PBART_TRACE ("-loop\n");
         decode (msg, input, tag);
     }
 
-    TRACE("-end count="<< count <<" tag="<< tag <<" BytesUntilLimit="<< input.BytesUntilLimit() <<'\n');
+    PBART_TRACE("-end count="<< count <<" tag="<< tag <<" BytesUntilLimit="<< input.BytesUntilLimit() <<'\n');
 
     // tag is zero => there is a decoding problem...
     if (tag == 0)
@@ -322,8 +306,8 @@ inline void Codec::decode (Message& msg, InputStream& input, int bytes)
     const char* end = position(input) + bytes;
 
     // decode each element and append it into the array
-    gp::uint32 tag;
-    while(  position(input) < end  &&  (tag = input.ReadTag())  )     //NOLINT
+    gp::uint32 tag = 0;
+    while(  position(input) < end  &&  (tag = input.ReadTag())  )
     {
         decode (msg, input, tag);
     }
@@ -341,13 +325,13 @@ inline
 void Codec::decodeMsg (Message& msg, Id item, gp::uint32 tag, InputStream& input, Message& sub)
 {
     // check tag and read message bytes
-    int bytes  =  readLength (msg.id(), item, tag, input);
+    int bytes = readLength (msg.id(), item, tag, input);
     if (bytes)
     {
+        assert (bytes >= 0);
         decode (sub, input, bytes);
+        assert (!bytes == !sub.size());
         sub.bytes_ = bytes;
-        assert( sub.bytes_ >= 0 );
-        assert(!sub.bytes_ == !sub.size());
     }
 }
 
@@ -451,13 +435,13 @@ void Codec::decodeSeqDouble (Message& msg, Id item, int bytes, InputStream& inpu
     int count = bytes / 8;
     assert (bytes % 8 == 0);
 
-    TRACE ("decodeSeqDouble (msg="<< msg.id() <<", item="<< item <<", bytes="<< bytes <<", input="<< &input <<") count="<< count <<'\n');
+    PBART_TRACE ("decodeSeqDouble (msg="<< msg.id() <<", item="<< item <<", bytes="<< bytes <<", input="<< &input <<") count="<< count <<'\n');
 
     // // decode each element and append it into the array
     // while (position(input) < end)
     while (count--)
     {
-        TRACE("-loop\n");
+        PBART_TRACE("-loop\n");
 
         double element;
         bool ok = gpi::WireFormatLite::ReadPrimitive <double, fieldType> (&input, &element);
@@ -467,7 +451,7 @@ void Codec::decodeSeqDouble (Message& msg, Id item, int bytes, InputStream& inpu
         vector.push_back (element);
     }
 
-    TRACE("-end\n");
+    PBART_TRACE("-end\n");
 
     // if (position(input) != end)
     //   throw DecodeException (msg.id(), "mismatch of sequence size within input protobuf", item);
@@ -633,7 +617,9 @@ void Codec::decodeSeqDouble (Message& msg, Id item, gp::uint32 tag, InputStream&
 //--------------------------------------------------------------------------
 inline void Codec::decode (Message& msg, InputStream& input, gp::uint32 tag)
 {
-    Id item = gpi::WireFormatLite::GetTagFieldNumber (tag);
+    assert( gpi::WireFormatLite::GetTagFieldNumber(tag) >= ID_MIN );
+    assert( gpi::WireFormatLite::GetTagFieldNumber(tag) <= ID_MAX );
+    Id item = static_cast<Id>( gpi::WireFormatLite::GetTagFieldNumber(tag) );
 
     // check if item ID is correct
     // if same ID => check header and return
@@ -670,6 +656,13 @@ inline void Codec::decode (Message& msg, InputStream& input, gp::uint32 tag)
     const Type type = msg.type(it->first);
     switch (type)
     {
+    case Type::EMPTY:
+        assert(0&&"Unexpected Type::EMPTY from msg.type(it->first)");
+        BOOST_FALLTHROUGH; // for optimization continue with next case
+    default:
+        assert(0&&"Unexpected type from msg.type(it->first)");
+        BOOST_FALLTHROUGH; // for optimization continue with next case
+
     case Type::BOOL:
         decodeBool (msg, item, tag, input);
         break;
@@ -709,9 +702,6 @@ inline void Codec::decode (Message& msg, InputStream& input, gp::uint32 tag)
     case Type::SEQ_MESSAGE:
         decodeSeqMsg (msg, item, tag, input);
         break;
-
-    default:
-        assert(0&&"Unexpected type from msg.type(it->first)");
     }
 }
 
@@ -740,7 +730,7 @@ void Codec::decode (Message& msg, InputStream& input)
     }
 
     //  tag = zero => means the End of InputStream
-    while( gp::uint32 tag = input.ReadTag() )                         //NOLINT
+    while( gp::uint32 tag = input.ReadTag() )
     {
         decode (msg, input, tag);
     }

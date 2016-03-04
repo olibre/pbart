@@ -6,8 +6,8 @@
  *  Pbart is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU Affero General Public License (AGPL)
  *  version 3 or (at your option) any later version.
- * 
- *  You should have received a copy of the GNU Affero General Public License 
+ *
+ *  You should have received a copy of the GNU Affero General Public License
  *  along with Pbart (maybe in file LICENSE).
  *  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -17,17 +17,17 @@ package org.Lmap.pbart;
  * @author olibre (olibre@Lmap.org)
  *
  */
-public class DmlException extends java.lang.Exception {
+public class RuntimeException extends java.lang.RuntimeException {
 
-    public DmlException(String text) {
+    public RuntimeException(String text) {
         super(text);
     }
 
-    public DmlException(Throwable exception) {
+    public RuntimeException(Throwable exception) {
         super(exception);
     }
 
-    public DmlException(String text, Throwable exception) {
+    public RuntimeException(String text, Throwable exception) {
         super(text, exception);
     }
 }

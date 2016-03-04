@@ -126,7 +126,7 @@ public:
 private:
     ItemsById    items_;                      //data
 
-    Type         type_; //typeDico
+    Type         type_;
     bool         deprecated_;
 
 public:
@@ -254,9 +254,9 @@ namespace pbart
 inline void  Header::init (int version, uint_fast16_t checksum)
 {
     str.resize (3);
-    str[0] =  version;
-    str[1] = (checksum & 0xFF00) >> 8;
-    str[2] =  checksum & 0x00FF;
+    str[0] = static_cast<char>( version                );
+    str[1] = static_cast<char>((checksum & 0xFF00) >> 8);
+    str[2] = static_cast<char>( checksum & 0x00FF      );
 }
 
 // ------------------------------------------------------------------------
@@ -368,14 +368,18 @@ bool DicoT<V>::operator == (const DicoT& other) const
 
 //------------------------------------------------------------------------------
 template <typename V>
-const FieldT<V>&  DicoT<V>::field (Id id/*, const std::nothrow_t&*/) const
+const FieldT<V>&  DicoT<V>::field (Id id) const
 {
-    if (id >= fieldById_.size())
+    size_t index = static_cast<size_t>( id );
+
+    if (index < fieldById_.size())
+    {
+        return fieldById_[ index ];
+    }
+    else
     {
         return fieldById_[ 0 ];
     }
-
-    return fieldById_[ id ];
 }
 
 
@@ -432,11 +436,12 @@ Id DicoT<V>::addName (Id id, const std::string& name)
 
 // ------------------------------------------------------------------------
 // Helper
-template <typename T>
-static void enlarge (T& vector, size_t index)
+template <typename T, typename U>
+inline void enlarge (T& vector, U index)
 {
-    if (vector.size() <= index)
-        vector.resize( index + 1 );
+    size_t i = static_cast<size_t>(index);
+    if (vector.size() <= i)
+        vector.resize (i + 1);
 }
 
 // ------------------------------------------------------------------------
@@ -456,7 +461,7 @@ pbart::FieldT<V>& DicoT<V>::addField (Id id, const std::string& name)
     }
 
     enlarge (fieldById_, id);
-    Field& dest = fieldById_.at(id);
+    Field& dest = fieldById_.at( static_cast<size_t>(id) );
     if (dest.type() != Type::EMPTY) //duplicated Id
     {
         std::ostringstream oss;

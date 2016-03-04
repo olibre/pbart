@@ -17,7 +17,7 @@ package org.Lmap.pbart;
  * @author olibre (olibre@Lmap.org)
  *
  */
-public class DicoException extends DmlException {
+public class DicoException extends Exception {
 
     public DicoException(String text) {
         super(text);
