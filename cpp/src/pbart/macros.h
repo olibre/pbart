@@ -12,8 +12,8 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PBART_DEBUG_H_
-#define PBART_DEBUG_H_
+#ifndef PBART_MACRO_H_
+#define PBART_MACRO_H_
 
 #ifdef PBART_ENABLE_TRACE
 #  ifdef _MSC_VER
@@ -40,4 +40,4 @@ do {  std::stringstream s;  s << x;     \
 //#endif
 
 
-#endif  // PBART_DEBUG_H_
+#endif  // PBART_MACRO_H_
