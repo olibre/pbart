@@ -168,7 +168,7 @@ std::string DicoXMLReader::context (const tinyxml2::XMLElement&) const
 // <FieldDef name="Qty"    id="0" type="long"    deprecated="false" comment="Need Xetra" />
 void DicoXMLReader::parseFieldDefElt (tinyxml2::XMLElement *elem)
 {
-    const std::string& name     = getStringAttribute  (elem, "name");
+    const std::string  name     = getStringAttribute  (elem, "name");
     signed             signedId = getIntegerAttribute (elem, "id");
     if (signedId <= ID_MIN)
     {
@@ -232,7 +232,7 @@ void DicoXMLReader::parseFieldDefElt (tinyxml2::XMLElement *elem)
 // <MessageDef id="0" name="market.StOrder" deprecated="false"> // ajout comment
 void DicoXMLReader::parseMessageDefElt (tinyxml2::XMLElement *elem)
 {
-    const std::string& name = getStringAttribute  (elem, "name");
+    const std::string  name = getStringAttribute  (elem, "name");
     signed signedId         = getIntegerAttribute (elem, "id");
     if (signedId <= ID_MIN)
     {
@@ -279,9 +279,9 @@ void DicoXMLReader::parseMessageDefElt (tinyxml2::XMLElement *elem)
 void DicoXMLReader::addItem (tinyxml2::XMLElement *elem, Field& message)
 {
     // get attributes from XML
-    std::string name     = getStringAttribute  (elem, "name");
-    bool        required = getBooleanAttribute (elem, "required");  //required is stored within Item::required attribute
-    bool        repeated = getBooleanAttribute (elem, "repeated");  //repeated is used to calculmated type
+    const std::string name     = getStringAttribute  (elem, "name");
+    bool              required = getBooleanAttribute (elem, "required");  //required is stored within Item::required attribute
+    bool              repeated = getBooleanAttribute (elem, "repeated");  //repeated is used to calculmated type
     //   => type is then stored within Variant (default value)
     // find ID
     Id id = dico_.id (name);
