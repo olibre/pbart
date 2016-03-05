@@ -22,30 +22,30 @@ project(pbart)
 ## OPTIONS ##
 #############
 
-# Usage: cmake -DSANITIZE=ON
 option(SANITIZE "Sanity check" OFF)
+# Usage: cmake -DSANITIZE=ON
 
 # Static code analysis
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Generate file 'compile_commands.json' for clang-check
 # Usage: awk -F: '/"file"/{print $2 }' build/compile_commands.json | xargs clang-check -fixit -p build
-#option(CMAKE_EXPORT_COMPILE_COMMANDS "Produce compile_commands.json for clang-check" ON)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+#        awk -F: '/"file"/{print $2 }' build/compile_commands.json | xargs clang-tidy  -fix   -p build
 
 # Default: -march=corei7
-# Usages:  cmake .. -DMARCH=native (if native => convert to real cpu-type)
-#          cmake .. -DMARCH=       (disable flag -march)
 set( MARCH "corei7"  CACHE STRING "Control flag -march" )
+# Usage:  cmake .. -DMARCH=native (if native => convert to real cpu-type)
+#         cmake .. -DMARCH=       (disable flag -march)
 
-# Usage: cmake -DOPTIM=-Ofast
 set( OPTIM "" CACHE STRING "Control flags -Ox" )
+# Usage: cmake -DOPTIM=-Ofast
 
-# Usage: cmake -DLTO=ON
 option (LTO "Link Time Optimization" OFF)
+# Usage: cmake -DLTO=ON
 
+set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or use)" )
 # Usage: cmake -DPGO=generate
 #        ctest
 #        cmake -DPGO=use
-set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or use)" )
 
 # For future use TODO (olibre)
 #set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake")
@@ -373,8 +373,32 @@ add_test(             TestJNI TestJNI ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
 ##       JAVA       ##
 ######################
 
-file(GLOB PbartJavaFiles java/src/main/java/org/Lmap/pbart/*.java)
-add_jar(pbart-java SOURCES ${PbartJavaFiles}
-                   ENTRY_POINT java/src/main/java/org/Lmap/pbart
+file(GLOB PbartJavaFiles       java/src/main/java/org/Lmap/pbart/*.java)
+add_jar(pbart-java #ENTRY_POINT java/src/main/java/org/Lmap/pbart
+                   SOURCES ${PbartJavaFiles}
                    OUTPUT_NAME pbart
+                   VERSION     1.0.0  # TODO (olibre): Retreive from CMAKE_PROJECT_VERSION
 )
+
+find_jar (junit
+          NAMES junit4-4.13 junit4-4.12 junit4-4.11 junit4-4.10 junit4-4.9 junit4-4.8 junit4-4.7 junit4-4.6 junit
+          DOC "Search JUnit: first v4, then v3"
+)
+if( NOT junit)
+    message(WARNING "** Cannot find JUnit jar in ${Java_LIBRARIES} => Skip Java Unit Tests")
+else()
+    message(STATUS "** Found ${junit} => Enable Java Unit Tests")
+    add_jar(TestJavaSimple SOURCES      java/src/test/java/org/Lmap/pbart/TestSimple.java
+                           INCLUDE_JARS pbart-java ${junit}
+                           ENTRY_POINT  org/junit/runner/JUnitCore
+    )
+    add_jar(TestJavaPerf   SOURCES      java/src/test/java/org/Lmap/pbart/TestPerf.java
+                           INCLUDE_JARS pbart-java ${junit}
+                           ENTRY_POINT  org/junit/runner/JUnitCore
+    )
+#java -cp buildm/TestJavaSimple.jar:/usr/share/java/junit4-4.12.jar:buildm/pbart.jar  org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple
+#java -Djava.library.path=buildm -cp buildm/TestJavaSimple.jar:/usr/share/java/junit4-4.12.jar:buildm/pbart.jar  org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple
+
+    add_test(TestJavaSimple java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJavaSimple.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple)
+    add_test(TestJavaPerf   java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJavaPerf.jar   org.junit.runner.JUnitCore org.Lmap.pbart.TestPerf  )
+endif()
