@@ -22,9 +22,6 @@ project(pbart)
 ## OPTIONS ##
 #############
 
-option(SANITIZE "Sanity check" OFF)
-# Usage: cmake -DSANITIZE=ON
-
 # Static code analysis
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Generate file 'compile_commands.json' for clang-check
@@ -47,9 +44,6 @@ set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or
 #        ctest
 #        cmake -DPGO=use
 
-# For future use TODO (olibre)
-#set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake")
-
 
 ######################
 ## CMAKE_BUILD_TYPE ##
@@ -58,6 +52,7 @@ set (PGO "" CACHE STRING "Profile Guided Optimization (can be empty, generate or
 # Release  = Debug info g3 + disable assert
 # Coverage = Debug info g3 + disable assert + Coverage
 # Debug    = Debug info g3 + enable  assert + -D_GLIBCXX_DEBUG_PEDANTIC
+# Sanitize = Enable sanitize compiler flags
 
 # Default = Release
 if( NOT CMAKE_BUILD_TYPE )
@@ -90,7 +85,7 @@ if( CMAKE_BUILD_TYPE STREQUAL "Coverage" )
                                  --html --html-details --sort-uncovered
                                  --print-summary --exclude-unreachable-branches
             #   WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-                COMMAND echo "Coverage report: firefox ${CMAKE_BINARY_DIR}/gcovr.html"
+                COMMAND echo "** Coverage report: firefox ${CMAKE_BINARY_DIR}/gcovr.html"
             )
         else()
             message(WARNING "** Cannot find command 'gcovr' => 'apt install gcovr' for code coverage report (HTML)")
@@ -111,7 +106,7 @@ if( CMAKE_BUILD_TYPE STREQUAL "Coverage" )
                 COMMAND ${genhtml} --rc genhtml_branch_coverage=1 ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.info
                                    --output-directory             ${CMAKE_BINARY_DIR}/lcov
                                    --highlight --legend --quiet
-                COMMAND echo "Coverage report: firefox ${CMAKE_BINARY_DIR}/lcov/index.html"
+                COMMAND echo "** Coverage report: firefox ${CMAKE_BINARY_DIR}/lcov/index.html"
             )
         else()
             message(WARNING "** Cannot find both commands 'lcov' and 'genhtml' => 'apt install lcov' for code coverage report (HTML)")
@@ -157,20 +152,25 @@ if( OPTIM )
 endif()
 
 # Instrument code for run-time analysis
-if(SANITIZE)
-    add_compile_options(-fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=signed-integer-overflow -fsanitize=shift -fsanitize=integer-divide-by-zero -fsanitize=null)
+if( CMAKE_BUILD_TYPE STREQUAL "Sanitize" )
+    add_compile_options(-fsanitize=address -fsanitize=leak -fsanitize=undefined
+                        -fsanitize=signed-integer-overflow -fsanitize=shift
+                        -fsanitize=integer-divide-by-zero -fsanitize=null)
+else()
+
+    # Full debug info for all other CMAKE_BUILD_TYPE
+    add_compile_options( -g3 -ggdb3 )  # -g3 -> include also the MACRO definitions
+
+    # Enable many wanings
+    if (CMAKE_COMPILER_IS_GNUCXX)
+        set (WarningFlags -Wall -Wextra -Wswitch-enum -Wno-ignored-qualifiers -pedantic -pedantic-errors -Wconversion -Wno-unused-but-set-variable -Wno-unused-variable -Wno-unused-function -Wno-conversion) #-Weffc++ -Wpadded)
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        set (WarningFlags -Weverything -Wno-c++98-compat)
+        #et (WarningFlags -Wimplicit-fallthrough)
+    endif()
+
 endif()
 
-# Full debug info for all CMAKE_BUILD_TYPE
-add_compile_options( -g3 -ggdb3 )  # -g3 -> include also the MACRO definitions
-
-# Enable many wanings
-if (CMAKE_COMPILER_IS_GNUCXX)
-    set (WarningFlags -Wall -Wextra -Wswitch-enum -Wno-ignored-qualifiers -pedantic -pedantic-errors -Wconversion -Wno-unused-but-set-variable -Wno-unused-variable -Wno-unused-function -Wno-conversion) #-Weffc++ -Wpadded)
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set (WarningFlags -Weverything -Wno-c++98-compat)
-    #et (WarningFlags -Wimplicit-fallthrough)
-endif()
 
 # Speed: Use pipes rather than temporary files between the compiler stages
 add_compile_options( -pipe )
@@ -306,9 +306,9 @@ add_executable(       TestCodecRepeated cpp/unit-test/pbart/TestCodecRepeated.cp
 target_link_libraries(TestCodecRepeated TestMain)
 add_test(             TestCodecRepeated TestCodec   ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
 
-#add_executable(       TestDicoAsMsg cpp/unit-test/pbart/TestDicoAsMsg.cpp)
-#target_link_libraries(TestDicoAsMsg TestMain)
-#add_test(             TestDicoAsMsg TestDicoAsMsg  ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_executable(       TestDicoAsMsg cpp/unit-test/pbart/TestDicoAsMsg.cpp)
+target_link_libraries(TestDicoAsMsg TestMain)
+add_test(             TestDicoAsMsg TestDicoAsMsg  ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
 
 add_executable(       TestDico          cpp/unit-test/pbart/TestDico.cpp)
 target_link_libraries(TestDico          TestMain)
@@ -388,17 +388,11 @@ if( NOT junit)
     message(WARNING "** Cannot find JUnit jar in ${Java_LIBRARIES} => Skip Java Unit Tests")
 else()
     message(STATUS "** Found ${junit} => Enable Java Unit Tests")
-    add_jar(TestJavaSimple SOURCES      java/src/test/java/org/Lmap/pbart/TestSimple.java
-                           INCLUDE_JARS pbart-java ${junit}
-                           ENTRY_POINT  org/junit/runner/JUnitCore
+    add_jar(TestJava INCLUDE_JARS pbart-java ${junit}
+                     ENTRY_POINT  org/junit/runner/JUnitCore
+                     SOURCES      java/src/test/java/org/Lmap/pbart/TestSimple.java
+                                  java/src/test/java/org/Lmap/pbart/TestPerf.java
     )
-    add_jar(TestJavaPerf   SOURCES      java/src/test/java/org/Lmap/pbart/TestPerf.java
-                           INCLUDE_JARS pbart-java ${junit}
-                           ENTRY_POINT  org/junit/runner/JUnitCore
-    )
-#java -cp buildm/TestJavaSimple.jar:/usr/share/java/junit4-4.12.jar:buildm/pbart.jar  org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple
-#java -Djava.library.path=buildm -cp buildm/TestJavaSimple.jar:/usr/share/java/junit4-4.12.jar:buildm/pbart.jar  org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple
-
-    add_test(TestJavaSimple java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJavaSimple.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple)
-    add_test(TestJavaPerf   java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJavaPerf.jar   org.junit.runner.JUnitCore org.Lmap.pbart.TestPerf  )
+    add_test(TestJavaSimple java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJava.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple)
+    add_test(TestJavaPerf   java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJava.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestPerf  )
 endif()
