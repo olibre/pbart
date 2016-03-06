@@ -60,7 +60,7 @@ public class TestPerf {
 
     public void bench (String name) throws DicoException, CodecException {
         serializer = new Serializer();
-        serializer.loadDico("../cpp/unit-test/data/dico-Perf.xml");
+        serializer.loadDico("../src/test/dico/dico-Perf.xml");
         int id = serializer.getId (name);
         bench (id, minlen);
         bench (id, maxlen);

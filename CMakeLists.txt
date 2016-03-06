@@ -78,7 +78,7 @@ if( CMAKE_BUILD_TYPE STREQUAL "Coverage" )
             add_custom_target (gcovr
                 COMMAND ${gcovr} --root             ${CMAKE_SOURCE_DIR}
                                  --exclude          ${CMAKE_SOURCE_DIR}/ext
-                                 --exclude          ${CMAKE_SOURCE_DIR}/cpp/unit-test
+                                 --exclude          ${CMAKE_SOURCE_DIR}/src/test
                                  --exclude          ${CMAKE_BINARY_DIR}
                                  --object-directory ${CMAKE_BINARY_DIR}
                                  --output           ${CMAKE_BINARY_DIR}/gcovr.html
@@ -97,10 +97,11 @@ if( CMAKE_BUILD_TYPE STREQUAL "Coverage" )
             add_custom_target (lcov
                 COMMAND ${lcov}    --capture      --directory     ${CMAKE_BINARY_DIR}
                                    --no-external  --output-file   ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}-all.info
-                                   --no-checksum --base-directory ${CMAKE_SOURCE_DIR}/cpp
+                                   --no-checksum --base-directory ${CMAKE_SOURCE_DIR}
                                    --rc    lcov_branch_coverage=1 --quiet
                 COMMAND ${lcov}    --quiet --extract              ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}-all.info
-                                                                  ${CMAKE_SOURCE_DIR}/cpp/[isj]*/*/*
+                                                                  ${CMAKE_SOURCE_DIR}/include/pbart/*
+                                                                  ${CMAKE_SOURCE_DIR}/src/main/cpp/*/*
                                    --no-checksum --output-file    ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.info
                                    --rc    lcov_branch_coverage=1
                 COMMAND ${genhtml} --rc genhtml_branch_coverage=1 ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}.info
@@ -271,12 +272,12 @@ set_target_properties( pbart_cppunit PROPERTIES
 ## C++ CORE LIBRARY ##
 ######################
 
-file (GLOB pbart_private_files cpp/src/pbart/*.cpp
-                               cpp/src/pbart/*.h    )
-file (GLOB pbart_public_files  cpp/include/pbart/*.h)
+file (GLOB pbart_private_files src/main/cpp/pbart/*.cpp
+                               src/main/cpp/pbart/*.h    )
+file (GLOB pbart_public_files  include/pbart/*.h         )
 add_library(               pbart ${pbart_private_files} ${pbart_public_files})
 target_link_libraries(     pbart PUBLIC  pbart_Protobuf pbart_Boost PRIVATE pbart_TinyXML)
-target_include_directories(pbart PUBLIC  cpp/include)
+target_include_directories(pbart PUBLIC  include)
 #arget_compile_definitions(pbart PRIVATE COMPILING_PBART=CMake)  # For MSWin export dll
 target_compile_features(   pbart PUBLIC  cxx_long_long_type)
 target_compile_options(    pbart PUBLIC  ${CoverageCmplFlags} PRIVATE ${WarningFlags})
@@ -289,42 +290,44 @@ target_link_libraries(     pbart PUBLIC  ${CoverageLinkFlags} PRIVATE ${WarningF
 
 enable_testing()
 
-add_library(          TestMain cpp/unit-test/pbart/Main.cpp)
+add_library(          TestMain src/test/cpp/pbart/Main.cpp)
 target_link_libraries(TestMain pbart pbart_cppunit)
 
-protobuf_generate_cpp(DicoBigSrc DicoBigHdr cpp/unit-test/data/dico-Big.proto)
-add_executable(            TestBig cpp/unit-test/pbart/TestBig.cpp ${DicoBigSrc} ${DicoBigHdr})
+set (DicoDir ${CMAKE_SOURCE_DIR}/src/test/dico/)
+
+protobuf_generate_cpp(DicoBigSrc DicoBigHdr ${DicoDir}/dico-Big.proto)
+add_executable(            TestBig src/test/cpp/pbart/TestBig.cpp ${DicoBigSrc} ${DicoBigHdr})
 target_compile_definitions(TestBig PRIVATE DICO_BIG_PROTOBUF_HEADER="${DicoBigHdr}")
 target_link_libraries(     TestBig TestMain)
-add_test(                  TestBig TestBig          ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(                  TestBig TestBig          ${DicoDir} )
 
-add_executable(       TestCodec cpp/unit-test/pbart/TestCodec.cpp)
+add_executable(       TestCodec src/test/cpp/pbart/TestCodec.cpp)
 target_link_libraries(TestCodec TestMain)
-add_test(             TestCodec TestCodec           ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestCodec TestCodec           ${DicoDir} )
 
-add_executable(       TestCodecRepeated cpp/unit-test/pbart/TestCodecRepeated.cpp)
+add_executable(       TestCodecRepeated src/test/cpp/pbart/TestCodecRepeated.cpp)
 target_link_libraries(TestCodecRepeated TestMain)
-add_test(             TestCodecRepeated TestCodec   ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestCodecRepeated TestCodec   ${DicoDir} )
 
-add_executable(       TestDicoAsMsg cpp/unit-test/pbart/TestDicoAsMsg.cpp)
+add_executable(       TestDicoAsMsg src/test/cpp/pbart/TestDicoAsMsg.cpp)
 target_link_libraries(TestDicoAsMsg TestMain)
-add_test(             TestDicoAsMsg TestDicoAsMsg  ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestDicoAsMsg TestDicoAsMsg   ${DicoDir} )
 
-add_executable(       TestDico          cpp/unit-test/pbart/TestDico.cpp)
+add_executable(       TestDico          src/test/cpp/pbart/TestDico.cpp)
 target_link_libraries(TestDico          TestMain)
-add_test(             TestDico          TestDico    ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestDico          TestDico    ${DicoDir} )
 
-add_executable(       TestMessage       cpp/unit-test/pbart/TestMessage.cpp)
+add_executable(       TestMessage       src/test/cpp/pbart/TestMessage.cpp)
 target_link_libraries(TestMessage       TestMain)
-add_test(             TestMessage       TestMessage ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestMessage       TestMessage ${DicoDir} )
 
-add_executable(       TestPerf          cpp/unit-test/pbart/TestPerf.cpp)
+add_executable(       TestPerf          src/test/cpp/pbart/TestPerf.cpp)
 target_link_libraries(TestPerf          TestMain)
-add_test(             TestPerf          TestPerf    ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestPerf          TestPerf    ${DicoDir} )
 
-add_executable(       TestVariant       cpp/unit-test/pbart/TestVariant.cpp)
+add_executable(       TestVariant       src/test/cpp/pbart/TestVariant.cpp)
 target_link_libraries(TestVariant       TestMain)
-add_test(             TestVariant       TestVariant ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestVariant       TestVariant ${DicoDir} )
 
 
 ######################
@@ -334,23 +337,24 @@ add_test(             TestVariant       TestVariant ${CMAKE_SOURCE_DIR}/cpp/unit
 find_package(Java COMPONENTS Development)
 include (UseJava)
 find_package(JNI)
+
 create_javah(
     TARGET          pbart-jni-serializer-header
     GENERATED_FILES PbartJniSerializerHeader
     CLASSES         org.Lmap.pbart.Serializer
-    CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
+    CLASSPATH       ${PROJECT_SOURCE_DIR}/src/main/java
 )
 create_javah(
     TARGET          pbart-jni-message-header
     GENERATED_FILES PbartJniMessageHeader
     CLASSES         org.Lmap.pbart.Message
-    CLASSPATH       ${PROJECT_SOURCE_DIR}/java/src/main/java
+    CLASSPATH       ${PROJECT_SOURCE_DIR}/src/main/java
 )
 
-add_library( pbart-jni cpp/src/jni/org_Lmap_pbart_Message.cpp
-                       cpp/src/jni/org_Lmap_pbart_Serializer.cpp
-                       cpp/src/jni/cpp-java-conversion-helpers.cpp
-                       cpp/src/jni/cpp-java-conversion-helpers.h
+add_library( pbart-jni src/main/cpp/jni/org_Lmap_pbart_Message.cpp
+                       src/main/cpp/jni/org_Lmap_pbart_Serializer.cpp
+                       src/main/cpp/jni/cpp-java-conversion-helpers.cpp
+                       src/main/cpp/jni/cpp-java-conversion-helpers.h
                        ${PbartJniSerializerHeader}
                        ${PbartJniMessageHeader}
 )
@@ -364,16 +368,16 @@ target_compile_definitions(pbart-jni PUBLIC
     GENERATED_JNI_MESSAGE_HEADER="${PbartJniMessageHeader}"
 )
 
-add_executable(       TestJNI cpp/unit-test/jni/TestJNI.cpp)
+add_executable(       TestJNI src/test/cpp/jni/TestJNI.cpp)
 target_link_libraries(TestJNI pbart-jni TestMain)
-add_test(             TestJNI TestJNI ${CMAKE_SOURCE_DIR}/cpp/unit-test/data/ )
+add_test(             TestJNI TestJNI ${DicoDir})
 
 
 ######################
 ##       JAVA       ##
 ######################
 
-file(GLOB PbartJavaFiles       java/src/main/java/org/Lmap/pbart/*.java)
+file(GLOB PbartJavaFiles       src/main/java/org/Lmap/pbart/*.java)
 add_jar(pbart-java #ENTRY_POINT java/src/main/java/org/Lmap/pbart
                    SOURCES ${PbartJavaFiles}
                    OUTPUT_NAME pbart
@@ -390,8 +394,8 @@ else()
     message(STATUS "** Found ${junit} => Enable Java Unit Tests")
     add_jar(TestJava INCLUDE_JARS pbart-java ${junit}
                      ENTRY_POINT  org/junit/runner/JUnitCore
-                     SOURCES      java/src/test/java/org/Lmap/pbart/TestSimple.java
-                                  java/src/test/java/org/Lmap/pbart/TestPerf.java
+                     SOURCES      src/test/java/org/Lmap/pbart/TestSimple.java
+                                  src/test/java/org/Lmap/pbart/TestPerf.java
     )
     add_test(TestJavaSimple java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJava.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestSimple)
     add_test(TestJavaPerf   java -Djava.library.path=${CMAKE_BINARY_DIR} -cp ${junit}:${CMAKE_BINARY_DIR}/pbart.jar:${CMAKE_BINARY_DIR}/TestJava.jar org.junit.runner.JUnitCore org.Lmap.pbart.TestPerf  )

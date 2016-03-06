@@ -45,15 +45,15 @@ int main (int argc, char *argv[])
     }
     else
     {
-        const char* dirs[] = {  "../../../../cpp/unit-test/data/"
-                                ,  "../../../cpp/unit-test/data/"
-                                ,     "../../cpp/unit-test/data/"
-                                ,        "../cpp/unit-test/data/"
-                                ,  "../pbart/cpp/unit-test/data/"
-                                ,     "pbart/cpp/unit-test/data/"
-                                ,           "cpp/unit-test/data/"
-                                ,               "unit-test/data/"
-                                ,                         "data/"
+        const char* dirs[] = {  "../../../../src/test/dico/"
+                                ,  "../../../src/test/dico/"
+                                ,     "../../src/test/dico/"
+                                ,        "../src/test/dico/"
+                                ,  "../pbart/src/test/dico/"
+                                ,     "pbart/src/test/dico/"
+                                ,           "src/test/dico/"
+                                ,               "test/dico/"
+                                ,                    "dico/"
                              };
 
         // Stop when a directory exist and set variable global_directory
