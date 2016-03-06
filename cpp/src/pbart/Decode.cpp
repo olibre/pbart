@@ -33,54 +33,38 @@ namespace pbart
 {
 
 //--------------------------------------------------------------------------
-inline std::string Codec::header (InputStream& input, gp::uint32 tag, Id id)
-{
-    // extract the wire type from tag
-    gpi::WireFormatLite::WireType wt = gpi::WireFormatLite::GetTagWireType (tag);
-    // check wire type consistency
-    if (wt != gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED)
-    {
-        throw MsgTypeException (id, wt, gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
-    }
-
-    std::string data;
-    bool ok = gpi::WireFormatLite::ReadBytes (&input, &data);
-    if (!ok)
-    {
-        throw DecodeException (id, "Cannot decode header within Message frame");
-    }
-
-    return data;
-}
-
-//  //--------------------------------------------------------------------------
-//  // not used
-//  // Id Codec::id (InputStream& input, const std::string& h)
-//  {
-//    gp::uint32  tag  = input.ReadTag();
-//    Id          id   = gpi::WireFormatLite::GetTagFieldNumber(tag);
-//    std::string data = header (input, tag, id);
-//
-//    if (data != h)
-//    {
-//      throw DecodeException (id, h, data); //TODO(Oliver): try to reload again dico (XML file)
-//    }
-//
-//    return id;
-//  }
-
-//--------------------------------------------------------------------------
 // helper functions for decoding
 //--------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------
+static inline Id getTagFieldNumber (gp::uint32 tag)
+{
+    int tagFieldNumber = gpi::WireFormatLite::GetTagFieldNumber(tag);
+
+    if (tagFieldNumber < ID_MIN || tagFieldNumber > ID_MAX)
+    {
+        std::ostringstream oss ("PBART message cannot contain TagFieldNumber=");
+        oss << tagFieldNumber;
+        if (tagFieldNumber < ID_MIN)
+            oss << " less than "<< ID_MIN;
+        if (tagFieldNumber > ID_MAX)
+            oss << " greater than "<< ID_MAX;
+        throw DecodeException (oss.str());
+    }
+
+    Id item = static_cast<Id>( tagFieldNumber );
+    return item;
+}
 
 //--------------------------------------------------------------------------
 template< gpi::WireFormatLite::WireType  wireType,
           gpi::WireFormatLite::FieldType fieldType,
           typename                       valueType >
-inline valueType readAny( Id                  id,
-                          Id                  item,
-                          gp::uint32          tag,
-                          Codec::InputStream& input )
+static inline
+valueType readAny( Id                  id,
+                   Id                  item,
+                   gp::uint32          tag,
+                   Codec::InputStream& input )
 {
     // extract the wire type from tag
     gpi::WireFormatLite::WireType wt =
@@ -170,7 +154,8 @@ int readLength (Id id, Id item, gp::uint32 tag, Codec::InputStream& input)
 
 
 //--------------------------------------------------------------------------
-template <typename valueType> inline
+template <typename valueType>
+static inline
 void insert (Id msg, Id item, valueType value, ValuesById& values)
 {
     // map::insert() returns a 'pair'. When 'pair.second' is 'false' => key was already inserted => throw
@@ -191,7 +176,47 @@ const char* position (google::protobuf::io::CodedInputStream& input)
     return ptr;
 }
 
+//  //--------------------------------------------------------------------------
+//  // not used
+//  // Id Codec::id (InputStream& input, const std::string& h)
+//  {
+//    gp::uint32  tag  = input.ReadTag();
+//    Id          id   = gpi::WireFormatLite::GetTagFieldNumber(tag);
+//    std::string data = header (input, tag, id);
+//
+//    if (data != h)
+//    {
+//      throw DecodeException (id, h, data); //TODO(Oliver): try to reload again dico (XML file)
+//    }
+//
+//    return id;
+//  }
 
+//--------------------------------------------------------------------------
+// Codec functions
+//--------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------
+inline
+std::string Codec::header (InputStream& input, gp::uint32 tag, Id id)
+{
+    // extract the wire type from tag
+    gpi::WireFormatLite::WireType wt = gpi::WireFormatLite::GetTagWireType (tag);
+    // check wire type consistency
+    if (wt != gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED)
+    {
+        throw MsgTypeException (id, wt, gpi::WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
+    }
+
+    std::string data;
+    bool ok = gpi::WireFormatLite::ReadBytes (&input, &data);
+    if (!ok)
+    {
+        throw DecodeException (id, "Cannot decode header within Message frame");
+    }
+
+    return data;
+}
 
 //--------------------------------------------------------------------------
 void Codec::decodeBool (Message& msg, Id item, gp::uint32 tag, InputStream& input)
@@ -617,9 +642,7 @@ void Codec::decodeSeqDouble (Message& msg, Id item, gp::uint32 tag, InputStream&
 //--------------------------------------------------------------------------
 inline void Codec::decode (Message& msg, InputStream& input, gp::uint32 tag)
 {
-    assert( gpi::WireFormatLite::GetTagFieldNumber(tag) >= ID_MIN );
-    assert( gpi::WireFormatLite::GetTagFieldNumber(tag) <= ID_MAX );
-    Id item = static_cast<Id>( gpi::WireFormatLite::GetTagFieldNumber(tag) );
+    Id item = getTagFieldNumber (tag);
 
     // check if item ID is correct
     // if same ID => check header and return
@@ -713,7 +736,7 @@ void Codec::decode (Message& msg, InputStream& input)
     if (msg.id() == 0)
     {
         gp::uint32 tag = input.ReadTag();
-        Id id = gpi::WireFormatLite::GetTagFieldNumber(tag);
+        Id id = getTagFieldNumber(tag);
         std::string data = header (input, tag, msg.id());
         if (msg.dico() && msg.dico()->header() == data)
         {

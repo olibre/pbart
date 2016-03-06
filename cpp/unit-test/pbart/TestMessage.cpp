@@ -435,7 +435,7 @@ public:
     void CorruptedHeader_4()  { corruptHeader <pbart::DecodeException>     (4); }  //Header format must be [Version][Checksum1][Checksum2]
     void CorruptedHeader_5()  { corruptHeader <pbart::DecodeException>     (5); }  //Header format must be [Version][Checksum1][Checksum2]
     void CorruptedHeader_6()  { corruptHeader <pbart::ItemException>       (6); }
-    void CorruptedHeader_7()  { corruptHeader <pbart::ItemException>       (7); }
+    void CorruptedHeader_7()  { corruptHeader <pbart::DecodeException>     (7); }
     void CorruptedHeader_8()  { corruptHeader <pbart::ItemException>       (8); }
     void CorruptedHeader_9()  { corruptHeader <pbart::ItemException>       (9); }
     void CorruptedHeader10()  { corruptHeader <pbart::DecodeException>    (10); }
