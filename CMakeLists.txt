@@ -338,6 +338,9 @@ find_package(Java COMPONENTS Development)
 include (UseJava)
 find_package(JNI)
 
+message (STATUS "** JAVA_AWT_LIBRARY=${JAVA_AWT_LIBRARY}")
+message (STATUS "** JAVA_JVM_LIBRARY=${JAVA_JVM_LIBRARY}")
+
 create_javah(
     TARGET          pbart-jni-serializer-header
     GENERATED_FILES PbartJniSerializerHeader
